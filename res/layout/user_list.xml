@@ -28,7 +28,7 @@
             android:layout_height="50dp"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:textAlignment="textEnd"
-            android:text="Estatísticas"
+            android:text="Lista de Usuários"
             android:id="@+id/textView"
             android:layout_weight="1"
             android:layout_gravity="right" />
