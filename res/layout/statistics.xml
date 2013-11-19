@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="56dp"
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/imageButton"
+            android:src="@drawable/ic_launcher" />
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/imageButton2"
+            android:src="@drawable/ic_launcher" />
+
+        <TextView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textAlignment="textEnd"
+            android:text="Estatísticas"
+            android:id="@+id/textView"
+            android:layout_weight="1"
+            android:layout_gravity="right" />
+
+    </LinearLayout>
+
+    <TabHost
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:id="@+id/tabHost">
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:orientation="vertical">
+
+            <TabWidget
+                android:id="@android:id/tabs"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"></TabWidget>
+
+            <FrameLayout
+                android:id="@android:id/tabcontent"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent">
+
+                <LinearLayout
+                    android:id="@+id/tab1"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="67dp"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:text="Maior Tempo:  26:48"
+                        android:id="@+id/textView2" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="67dp"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:text="Menor Tempo:  26:48"
+                        android:id="@+id/textView4" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="67dp"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:text="Tempo Médio:  26:48"
+                        android:id="@+id/textView3" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/tab2"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="67dp"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:text="Maior Tempo:  26:48"
+                        android:id="@+id/textView5" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="67dp"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:text="Tempo Médio:  26:48"
+                        android:id="@+id/textView6" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="67dp"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:text="Menor Tempo:  26:48"
+                        android:id="@+id/textView7" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/tab3"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="67dp"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:text="Maior Tempo:  26:48"
+                        android:id="@+id/textView8" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="67dp"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:text="Tempo Médio:  26:48"
+                        android:id="@+id/textView9" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="67dp"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:text="Menor Tempo:  26:48"
+                        android:id="@+id/textView10" />
+                </LinearLayout>
+            </FrameLayout>
+        </LinearLayout>
+    </TabHost>
+
+</LinearLayout>
