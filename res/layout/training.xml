@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="50dp">
+
+        <ImageButton
+            android:layout_width="70dp"
+            android:layout_height="63dp"
+            android:id="@+id/imageButton"
+            android:src="@drawable/ic_launcher" />
+
+        <ImageButton
+            android:layout_width="70dp"
+            android:layout_height="63dp"
+            android:id="@+id/imageButton2"
+            android:src="@drawable/ic_launcher" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Treino"
+            android:id="@+id/textView"
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="10dp"
+            android:textSize="24dp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <TableLayout
+        android:layout_width="305dp"
+        android:layout_height="272dp"
+        android:layout_marginLeft="20dp"
+        android:baselineAligned="false">
+
+        <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="54dp"
+            android:layout_marginBottom="20dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Data: 21/11/2013"
+                android:id="@+id/textView4"
+                android:layout_span="3"
+                android:textSize="18dp" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_marginBottom="20dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nado"
+                android:id="@+id/textView2"
+                android:textSize="18dp"
+                android:layout_marginRight="10dp" />
+
+            <Spinner
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/spinner"
+                android:spinnerMode="dropdown"
+                android:layout_column="1"
+                android:layout_span="3" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_marginBottom="20dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Atleta"
+                android:id="@+id/textView3"
+                android:textSize="18dp"
+                android:layout_marginRight="10dp" />
+
+            <Spinner
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/spinner2"
+                android:spinnerMode="dropdown"
+                android:layout_span="3" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_marginBottom="20dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Distância"
+                android:id="@+id/textView5"
+                android:textSize="18dp"
+                android:layout_marginRight="10dp" />
+
+            <EditText
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/editText" />
+
+            <TextView
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:text="metros"
+                android:id="@+id/textView6" />
+        </TableRow>
+
+    </TableLayout>
+
+    <Button
+        android:layout_width="208dp"
+        android:layout_height="wrap_content"
+        android:text="Iniciar"
+        android:id="@+id/button"
+        android:layout_span="2"
+        android:layout_gravity="center" />
+
+</LinearLayout>
