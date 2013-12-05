@@ -35,13 +35,12 @@
 
     </LinearLayout>
 
-    <TextView
+    <Chronometer
         android:layout_width="wrap_content"
-        android:layout_height="104dp"
-        android:text="00:00:00"
-        android:id="@+id/textView2"
-        android:textSize="60dp"
-        android:layout_gravity="center_horizontal" />
+        android:layout_height="wrap_content"
+        android:id="@+id/chronometer"
+        android:layout_gravity="center_horizontal"
+        android:textSize="60dp" />
 
     <LinearLayout
         android:orientation="horizontal"
@@ -61,7 +60,8 @@
             android:layout_height="wrap_content"
             android:inputType="number"
             android:ems="10"
-            android:id="@+id/editText" />
+            android:id="@+id/meters" />
+
     </LinearLayout>
 
     <LinearLayout
@@ -75,14 +75,23 @@
             android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:text="Iniciar"
-            android:id="@+id/button3" />
+            android:id="@+id/btControl" />
 
         <Button
             android:layout_width="150dp"
             android:layout_height="wrap_content"
-            android:text="Pausar"
-            android:id="@+id/button4" />
+            android:text="Descartar"
+            android:id="@+id/btUnsave"
+            android:enabled="false" />
     </LinearLayout>
+
+    <Button
+        android:layout_width="143dp"
+        android:layout_height="wrap_content"
+        android:text="Gravar"
+        android:id="@+id/btSave"
+        android:layout_gravity="center_horizontal"
+        android:enabled="false" />
 
     <LinearLayout
         android:orientation="horizontal"
@@ -91,24 +100,6 @@
         android:id="@+id/linearLayout2"
         android:layout_gravity="center_horizontal">
 
-        <Button
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:text="Gravar"
-            android:id="@+id/button" />
-
-        <Button
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:text="Reiniciar"
-            android:id="@+id/button2" />
     </LinearLayout>
-
-    <Button
-        android:layout_width="143dp"
-        android:layout_height="wrap_content"
-        android:text="Finalizar"
-        android:id="@+id/button5"
-        android:layout_gravity="center_horizontal" />
 
 </LinearLayout>
