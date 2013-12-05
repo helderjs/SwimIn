@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.app.Activity;
 import android.view.Menu;
 
+import com.ufba.swimin.R;
+
 public class Premios extends Activity {
 	
 	@Override

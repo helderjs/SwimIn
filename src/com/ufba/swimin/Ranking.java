@@ -1,5 +1,5 @@
 
-package matec89.telaslucas;
+package com.ufba.swimin;
 
 import android.os.Bundle;
 import android.app.Activity;

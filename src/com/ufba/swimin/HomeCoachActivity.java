@@ -9,7 +9,7 @@ public class HomeCoachActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.homeCoach);
+		setContentView(R.layout.home_coach);
 	}
 
 	@Override
