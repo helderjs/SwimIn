@@ -38,7 +38,8 @@
     <Spinner
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/spinner" />
+        android:id="@+id/spinner" 
+        android:entries="@array/tipo_listagem"/>
 
     <LinearLayout
         android:orientation="horizontal"
@@ -63,6 +64,7 @@
     <ListView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/listView" />
+        android:id="@+id/listView" 
+    	android:entries="@array/lista_usuarios" />
 
 </LinearLayout>
