@@ -1,4 +1,3 @@
-
 package com.ufba.swimin;
 
 import android.os.Bundle;
