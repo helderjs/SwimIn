@@ -4,5 +4,18 @@
     <string name="app_name">SwimIn</string>
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
+    <string-array name="tipo_listagem">
+	<item>Todos</item>
+	<item>Atletas</item>
+	<item>Equipe</item>
+	<item>Treinador</item>
+	</string-array>
+	<string-array name="lista_usuarios">
+	<item>André</item>
+	<item>Maria</item>
+	<item>João</item>
+	<item>Mário</item>
+	<item>Luigi</item>
+	</string-array>
 
 </resources>
