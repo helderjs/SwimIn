@@ -10,6 +10,8 @@ public class HomeCoachActivity extends Activity {
 
 	ImageButton btPerfil, btUsuarios, btTreinos, btRanking;
 	
+	//Home para Treinador
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
