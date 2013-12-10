@@ -27,6 +27,8 @@
         <activity android:name="com.ufba.swimin.StatisticsActivity"></activity>
         <activity android:name="com.ufba.swimin.ProfileActivity"></activity>
         <activity android:name="com.ufba.swimin.Premios"></activity>
+        <activity android:name="com.ufba.swimin.UserListActivity"></activity>
+        <activity android:name="com.ufba.swimin.Ranking"></activity>
     </application>
 
 </manifest>
