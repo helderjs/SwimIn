@@ -17,5 +17,11 @@
 	<item>Mário</item>
 	<item>Luigi</item>
 	</string-array>
+    <string-array name="lista_nados">
+        <item>Crawl</item>
+        <item>Costas</item>
+        <item>Peito</item>
+        <item>Borboleta</item>
+    </string-array>
 
 </resources>
