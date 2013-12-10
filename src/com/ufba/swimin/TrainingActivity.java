@@ -7,28 +7,36 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
 
 
 public class TrainingActivity extends Activity {
 
-	Button btStart;
+	EditText distancia;
+    Button btStart;
 	Context context = this;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.training);
-		
+
+        distancia = (EditText) findViewById(R.id.distancia);
 		btStart = (Button) findViewById(R.id.btStart);
 		
 		btStart.setOnClickListener(new View.OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				Intent intent = new Intent(context, CronometerActivity.class);
-				startActivity(intent);
-			}
-		});
+            @Override
+            public void onClick(View v) {
+                if (distancia.getText().toString().equals("")) {
+                    Toast.makeText(v.getContext(), "Defina os metros", Toast.LENGTH_LONG).show();
+                    return;
+                } else{
+                    Intent intent = new Intent(context, CronometerActivity.class);
+                    startActivity(intent);
+                }
+            }
+        });
 	}
 
 	@Override

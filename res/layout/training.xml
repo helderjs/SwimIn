@@ -51,7 +51,8 @@
                 android:id="@+id/spinner"
                 android:spinnerMode="dropdown"
                 android:layout_column="1"
-                android:layout_span="3" />
+                android:layout_span="3"
+                android:entries="@array/lista_nados" />
 
         </TableRow>
 
@@ -73,7 +74,8 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/spinner2"
                 android:spinnerMode="dropdown"
-                android:layout_span="3" />
+                android:layout_span="3"
+                android:entries="@array/lista_atletas" />
 
         </TableRow>
 
@@ -93,13 +95,8 @@
             <EditText
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
-                android:id="@+id/editText" />
+                android:id="@+id/distancia" />
 
-            <TextView
-                android:layout_width="50dp"
-                android:layout_height="wrap_content"
-                android:text="metros"
-                android:id="@+id/textView6" />
         </TableRow>
 
     </TableLayout>
