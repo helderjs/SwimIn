@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
+    android:orientation="vertical"
+    tools:context=".Ranking" >
 
     <LinearLayout
         android:layout_width="294dp"
@@ -19,13 +21,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@android:drawable/btn_star" />
-
-        <TextView
-            android:id="@+id/textView1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Ranking"
-            android:textAppearance="?android:attr/textAppearanceLarge" />
     </LinearLayout>
 
     <TabHost
@@ -68,13 +63,15 @@
                 <LinearLayout
                     android:id="@+id/tab2"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent" >
+                    android:layout_height="match_parent" 
+                    android:orientation="horizontal">
                 </LinearLayout>
 
                 <LinearLayout
                     android:id="@+id/tab3"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent" >
+                    android:layout_height="match_parent" 
+                    android:orientation="horizontal">
                 </LinearLayout>
 
             </FrameLayout>

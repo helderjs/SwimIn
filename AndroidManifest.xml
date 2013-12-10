@@ -23,10 +23,17 @@
             </intent-filter>
         </activity>
         <activity android:name="com.ufba.swimin.CronometerActivity"></activity>
-        <activity android:name="com.ufba.swimin.TrainingActivity"></activity>
+        <activity android:name="com.ufba.swimin.TrainingActivity"
+            	  android:label="@string/treino"></activity>
         <activity android:name="com.ufba.swimin.StatisticsActivity"></activity>
-        <activity android:name="com.ufba.swimin.ProfileActivity"></activity>
-        <activity android:name="com.ufba.swimin.Premios"></activity>
+        <activity android:name="com.ufba.swimin.ProfileActivity"
+                  android:label="@string/perfil"></activity>
+        <activity android:name="com.ufba.swimin.Premios"
+            	  android:label="@string/treino"></activity>
+        <activity android:name="com.ufba.swimin.UserListActivity"
+            	  android:label="@string/usuarios"></activity>
+        <activity android:name="com.ufba.swimin.Ranking"
+            	  android:label="@string/ranking"></activity>
     </application>
 
 </manifest>
