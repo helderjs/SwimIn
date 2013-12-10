@@ -108,7 +108,7 @@
         android:layout_width="208dp"
         android:layout_height="wrap_content"
         android:text="Iniciar"
-        android:id="@+id/button"
+        android:id="@+id/btStart"
         android:layout_span="2"
         android:layout_gravity="center" />
 
