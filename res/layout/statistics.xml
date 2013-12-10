@@ -136,6 +136,34 @@
                         android:text="Menor Tempo:  26:48"
                         android:id="@+id/textView10" />
                 </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/tab4"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="67dp"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:text="Maior Tempo:  26:48"
+                        android:id="@+id/textView2" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="67dp"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:text="Menor Tempo:  26:48"
+                        android:id="@+id/textView4" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="67dp"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:text="Tempo Médio:  26:48"
+                        android:id="@+id/textView3" />
+                </LinearLayout>
             </FrameLayout>
         </LinearLayout>
     </TabHost>
