@@ -1,5 +1,6 @@
 package com.ufba.swimin;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -21,6 +22,9 @@ public class TrainingActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.training);
+
+        ActionBar actionBar = getActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
 
         distancia = (EditText) findViewById(R.id.distancia);
 		btStart = (Button) findViewById(R.id.btStart);

@@ -24,16 +24,36 @@
         </activity>
         <activity android:name="com.ufba.swimin.CronometerActivity"></activity>
         <activity android:name="com.ufba.swimin.TrainingActivity"
-            	  android:label="@string/treino"></activity>
+            	  android:label="@string/treino"
+                  android:parentActivityName="com.ufba.swimin.HomeCoachActivity">
+                  <meta-data
+                    android:name="android.support.PARENT_ACTIVITY"
+                    android:value="com.ufba.swimin.HomeCoachActivity" />
+                  </activity>
         <activity android:name="com.ufba.swimin.StatisticsActivity"></activity>
         <activity android:name="com.ufba.swimin.ProfileActivity"
-                  android:label="@string/perfil"></activity>
+                  android:label="@string/perfil"
+                  android:parentActivityName="com.ufba.swimin.HomeCoachActivity">
+                  <meta-data
+                    android:name="android.support.PARENT_ACTIVITY"
+                    android:value="com.ufba.swimin.HomeCoachActivity" />
+                  </activity>
         <activity android:name="com.ufba.swimin.Premios"
             	  android:label="@string/treino"></activity>
         <activity android:name="com.ufba.swimin.UserListActivity"
-            	  android:label="@string/usuarios"></activity>
+            	  android:label="@string/usuarios"
+                  android:parentActivityName="com.ufba.swimin.HomeCoachActivity">
+                  <meta-data
+                    android:name="android.support.PARENT_ACTIVITY"
+                    android:value="com.ufba.swimin.HomeCoachActivity" />
+            	  </activity>
         <activity android:name="com.ufba.swimin.Ranking"
-            	  android:label="@string/ranking"></activity>
+            	  android:label="@string/ranking"
+                  android:parentActivityName="com.ufba.swimin.HomeCoachActivity">
+                  <meta-data
+                    android:name="android.support.PARENT_ACTIVITY"
+                    android:value="com.ufba.swimin.HomeCoachActivity" />
+                  </activity>
     </application>
 
 </manifest>
