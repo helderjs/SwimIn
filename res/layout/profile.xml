@@ -73,18 +73,19 @@
         android:layout_height="fill_parent">
 
         <Button
+            android:id="@+id/button"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
-            android:text="Estatística"
-            android:id="@+id/button"
-            android:layout_gravity="center_horizontal" />
+            android:layout_gravity="center_horizontal"
+            android:text="Estatísticas" />
 
         <Button
+            android:id="@+id/button2"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
-            android:text="Prêmio"
-            android:id="@+id/button2"
-            android:layout_gravity="center_horizontal" />
+            android:layout_gravity="center_horizontal"
+            android:text="Prêmios" />
+
     </LinearLayout>
 
 </LinearLayout>
