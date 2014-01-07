@@ -134,25 +134,29 @@
             <TableRow
                 android:id="@+id/tbRow2"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" >
+                android:layout_height="wrap_content" 
+                android:layout_marginTop="8dp">
             </TableRow>
 
             <TableRow
                 android:id="@+id/tbRow3"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" >
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp" >
             </TableRow>
 
             <TableRow
                 android:id="@+id/tbRow4"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" >
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp" >
             </TableRow>
 
             <TableRow
                 android:id="@+id/tbRow5"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" >
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp" >
             </TableRow>
             
         </TableLayout>
