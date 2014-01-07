@@ -19,7 +19,7 @@
             android:text="Nome:" />
 
         <EditText
-            android:id="@+id/editText1"
+            android:id="@+id/etNome"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -41,7 +41,7 @@
             android:orientation="vertical" >
 
             <Button
-                android:id="@+id/button1"
+                android:id="@+id/btAdicionar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="30dp"
@@ -57,23 +57,24 @@
 
             <RadioGroup 
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:id="@+id/rgMedalha">
             
             <RadioButton
-                android:id="@+id/radioButton2"
+                android:id="@+id/rbPrata"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
                 android:text="Prata" />
 
             <RadioButton
-                android:id="@+id/radioButton3"
+                android:id="@+id/rbBronze"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Bronze" />
 
             <RadioButton
-                android:id="@+id/radioButton1"
+                android:id="@+id/rbOuro"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="0dp"
@@ -117,38 +118,41 @@
             android:layout_marginTop="0dp" >
 
             <TableRow
-                android:id="@+id/tableRow1"
+                android:id="@+id/tbRow1"
                 android:layout_width="40dp"
                 android:layout_height="wrap_content" >
 
                 <ImageView
-                    android:id="@+id/ImageView01"
+                    android:id="@+id/ivMedalha1"
                     android:layout_width="40dp"
                     android:layout_height="30dp"
                     android:scaleType="fitCenter"
                     android:src="@drawable/gold_medal" />
 
-                <ImageView
-                    android:id="@+id/imageView2"
-                    android:layout_width="40dp"
-                    android:layout_height="30dp"
-                    android:scaleType="fitCenter"
-                    android:src="@drawable/bronze_medal" />
+            </TableRow>
 
-                <ImageView
-                    android:id="@+id/ImageView02"
-                    android:layout_width="40dp"
-                    android:layout_height="30dp"
-                    android:scaleType="fitCenter"
-                    android:src="@drawable/bronze_medal" />
+            <TableRow
+                android:id="@+id/tbRow2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" >
+            </TableRow>
 
-                <ImageView
-                    android:id="@+id/ImageView03"
-                    android:layout_width="40dp"
-                    android:layout_height="30dp"
-                    android:scaleType="fitCenter"
-                    android:src="@drawable/silver_medal" />
+            <TableRow
+                android:id="@+id/tbRow3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" >
+            </TableRow>
 
+            <TableRow
+                android:id="@+id/tbRow4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" >
+            </TableRow>
+
+            <TableRow
+                android:id="@+id/tbRow5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" >
             </TableRow>
             
         </TableLayout>
