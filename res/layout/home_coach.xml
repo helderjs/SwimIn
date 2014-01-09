@@ -12,15 +12,16 @@
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:text="Bem-vindo Joel Santana"
-            android:id="@+id/textView"
+            android:id="@+id/tvWelcome"
             android:textSize="24dp"
             android:textStyle="bold" />
 
         <Button
+            android:id="@+id/button"
             android:layout_width="80dp"
             android:layout_height="wrap_content"
-            android:text="Sair"
-            android:id="@+id/button" />
+            android:text="Sair" />
+
     </LinearLayout>
 
     <LinearLayout
@@ -37,7 +38,7 @@
             android:textSize="20dp" />
 
         <TextView
-            android:id="@+id/textView9"
+            android:id="@+id/tvName1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="70dp"
@@ -46,7 +47,7 @@
             android:textSize="20dp" />
 
         <TextView
-            android:id="@+id/textView3"
+            android:id="@+id/tvDateAndTime1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="70dp"
@@ -55,7 +56,7 @@
             android:textSize="18dp" />
 
         <TextView
-            android:id="@+id/textView4"
+            android:id="@+id/tvNado1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="90dp"
@@ -64,7 +65,7 @@
             android:textSize="18dp" />
 
         <TextView
-            android:id="@+id/textView5"
+            android:id="@+id/tvNado2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="90dp"
@@ -73,7 +74,7 @@
             android:textSize="18dp" />
 
         <TextView
-            android:id="@+id/textView10"
+            android:id="@+id/tvName2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="70dp"
@@ -82,7 +83,7 @@
             android:textSize="20dp" />
 
         <TextView
-            android:id="@+id/textView6"
+            android:id="@+id/tvDateAndTime2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="70dp"
@@ -91,7 +92,7 @@
             android:textSize="18dp" />
 
         <TextView
-            android:id="@+id/textView7"
+            android:id="@+id/tvNado3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="90dp"
@@ -100,7 +101,7 @@
             android:textSize="18dp" />
 
         <TextView
-            android:id="@+id/textView8"
+            android:id="@+id/tvNado4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="90dp"

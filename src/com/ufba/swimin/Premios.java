@@ -37,13 +37,24 @@ public class Premios extends Activity {
 		btAdicionar = (Button) findViewById(R.id.btAdicionar);
 		tbRow = (TableRow) findViewById(R.id.tbRow1);
 		
+		//O ImageView ivMedalha1 serve para passamarmos seus atributos,
+		//como largura e altura, as outras medalhas - isso é feito com
+		//ivMedalha.getLayoutParams()
+		
 		ImageView ivMedalha = (ImageView) findViewById(R.id.ivMedalha1);
 		ivMedalha.setVisibility(View.GONE);
 		
 		if(buscarDados()){
-			cursor.moveToFirst();
-			count=cursor.getCount();
+			cursor.moveToFirst();	//Aponta para a primeira linha da tabela
+			count=cursor.getCount();	//Guarda o número atual de medalhas
+			
+			//Loop criado para ler o banco e apresentar as medalhas na tela
+			
 			for(int i = 0; i<cursor.getCount(); i++){
+				
+				/*Caso existam 7 medalhas em uma mesma linha, as 
+				 * próximas serão adicionadas na linha logo abaixo
+				 * */
 				
 				if(i==7){
 					tbRow = (TableRow) findViewById(R.id.tbRow2);
@@ -58,7 +69,13 @@ public class Premios extends Activity {
 					tbRow = (TableRow) findViewById(R.id.tbRow5);
 				}
 				
+				//Cria um novo elemento ImageView para a nova medalha adicionada
+				
 				final ImageView medalha = new ImageView(Premios.this);
+				
+				/*Se o valor da coluna tipo for 0, a medalha é de prata;
+				 * se for 1, é bronze; se for 2, ouro.
+				 * */
 				
 				switch(cursor.getInt(cursor.getColumnIndex("tipo"))){
 				case 0: medalha.setImageResource(R.drawable.silver_medal);
@@ -85,15 +102,22 @@ public class Premios extends Activity {
 				
 				EditText etNome = (EditText) findViewById(R.id.etNome);
 				
+				//Compara se o conteúdo do campo nome é igual a vazio
 				if(etNome.getText().toString().equals("")){
 					exibirMensagem("Atenção","Você deve dar um nome a premiação.");
 					return;
 				}
 				
+				//Retorna se o número de medalhas for maior que 34
+				
 				if(count>34){
 					exibirMensagem("Atenção","Você atingiu o número máximo de premiações.");
 					return;
 				}
+				
+				/*Caso existam 7 medalhas em uma mesma linha, as 
+				 * próximas serão adicionadas na linha logo abaixo
+				 * */
 				
 				if(count==7){
 					tbRow = (TableRow) findViewById(R.id.tbRow2);
@@ -111,6 +135,8 @@ public class Premios extends Activity {
 				ImageView ivMedalha = (ImageView) findViewById(R.id.ivMedalha1);
 				
 				final ImageView medalha = new ImageView(Premios.this);
+				
+				//Captura o índice do radioButton selecionado
 				
 				RadioGroup rgMedalha = (RadioGroup) findViewById(R.id.rgMedalha);
 				int rbId = rgMedalha.getCheckedRadioButtonId();
@@ -141,6 +167,8 @@ public class Premios extends Activity {
 		});
 	}
 
+	//Busca a tablea com todas as medalhas de determinado atleta
+	
 	private boolean buscarDados(){
 		try{
 			cursor = bancoDados.query("premios", 

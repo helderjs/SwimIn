@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.Cursor;
 
@@ -27,6 +28,7 @@ public class HomeCoachActivity extends Activity {
 		setContentView(R.layout.home_coach);
 		
 		abreOuCriaBanco();
+		init();		//Carrega as informações na tela
 		//gravarRegistro();
 		
 		btPerfil = (ImageButton) findViewById(R.id.btPerfil);
@@ -81,6 +83,87 @@ public class HomeCoachActivity extends Activity {
 		return true;
 	}
 	
+	/* ---------------------------------------------------------------------
+	 * Carrega os dados da tela - texto de boas-vindas e últimos treinos
+	 */
+	
+	public void init(){
+		TextView tvWelcome, tvName1, tvName2, tvDateAndTime1, tvDateAndTime2,
+			tvNado1, tvNado2, tvNado3, tvNado4;
+		
+		tvWelcome = (TextView) findViewById(R.id.tvWelcome);
+		tvName1 = (TextView) findViewById(R.id.tvName1);
+		tvName2 = (TextView) findViewById(R.id.tvName2);
+		tvDateAndTime1 = (TextView) findViewById(R.id.tvDateAndTime1);
+		tvDateAndTime2 = (TextView) findViewById(R.id.tvDateAndTime2);
+		tvNado1 = (TextView) findViewById(R.id.tvNado1);
+		tvNado2 = (TextView) findViewById(R.id.tvNado2);
+		tvNado3 = (TextView) findViewById(R.id.tvNado3);
+		tvNado4 = (TextView) findViewById(R.id.tvNado4);
+		
+		// id_treinador será utilizado provisoriamente, enquanto nenhum login é implementado
+		String id_treinador = "2";
+		
+		// Busca o nome do treinador para exibir na tela de boas-vindas
+		buscarDados("pessoas", new String[]{"nome"},
+				"id = "+id_treinador);
+		tvWelcome.setText("Bem-vindo "
+				+ cursor.getString(cursor.getColumnIndex("nome")));
+		
+		// Recupera os dados do último treino
+		if(buscarDados("treinos", new String[]{"id_atleta","tipo_nado", "metros",
+				"tempo","data","hora"},
+				"id_treinador = "+id_treinador)){
+		
+			cursor.moveToLast();
+			int id_atleta = cursor.getInt(cursor.getColumnIndex("id_atleta"));
+			
+			String aux = cursor.getString(cursor.getColumnIndex("data")) +
+					" - " + cursor.getString(cursor.getColumnIndex("hora"));
+			tvDateAndTime1.setText(aux);
+			
+			aux = cursor.getString(cursor.getColumnIndex("tipo_nado"))
+					+ ": " + cursor.getString(cursor.getColumnIndex("tempo"));
+			tvNado1.setText(aux);
+			
+			// Recupera os dados do penúltimo treino
+	
+			if(cursor.moveToPrevious()){
+			
+				aux = cursor.getString(cursor.getColumnIndex("data")) +
+						" - " + cursor.getString(cursor.getColumnIndex("hora"));
+				tvDateAndTime2.setText(aux);
+				
+				aux = cursor.getString(cursor.getColumnIndex("tipo_nado"))
+						+ ": " + cursor.getString(cursor.getColumnIndex("tempo"));
+				tvNado3.setText(aux);
+				
+				try{
+					buscarDados("pessoas", new String[]{"nome"},"id = "
+							+ Integer.toString(cursor.getInt(
+									cursor.getColumnIndex("id_atleta"))));
+					tvName2.setText(cursor.getString(cursor.getColumnIndex("nome")));
+				}catch(Exception erro){
+					exibirMensagem("Erro", "Erro: " + erro.getMessage());
+				}
+			}
+			
+			try{
+				buscarDados("pessoas", new String[]{"nome"},"id = "
+						+ Integer.toString(id_atleta));
+				tvName1.setText(cursor.getString(cursor.getColumnIndex("nome")));
+			}catch(Exception erro){
+				exibirMensagem("Erro", "Erro: " + erro.getMessage());
+			}
+			
+			/*Alguns textos ficarão provisoriamente invisíveis, 
+			 * para melhoramento posterior
+			 * */
+			tvNado2.setVisibility(View.GONE);
+			tvNado4.setVisibility(View.GONE);
+		}
+	}
+	
 	//*******************	BANCO	*******************		
 	
 	public void abreOuCriaBanco() {
@@ -88,7 +171,7 @@ public class HomeCoachActivity extends Activity {
 			//Cria ou abre o banco
 			bancoDados = openOrCreateDatabase("bancoSwing", MODE_WORLD_READABLE, null);
 			
-			//bancoDados.execSQL("DROP TABLE IF EXISTS premios");
+			//bancoDados.execSQL("DROP TABLE IF EXISTS treinos");
 			
 			String sql = "CREATE TABLE IF NOT EXISTS pessoas "
 					+ "(id INTEGER PRIMARY KEY AUTOINCREMENT, nome TEXT, data_nasc TEXT, endereco TEXT)";
@@ -112,7 +195,8 @@ public class HomeCoachActivity extends Activity {
 			
 			sql = "CREATE TABLE IF NOT EXISTS treinos "
 					+ "(id INTEGER PRIMARY KEY AUTOINCREMENT, id_treinador INTEGER, "
-					+ "id_atleta INTEGER, tipo_nado TEXT, metros REAL, tempo INTEGER, "
+					+ "id_atleta INTEGER, tipo_nado TEXT, metros REAL, tempo TEXT, "
+					+ "data TEXT, hora TEXT, "
 					+ "FOREIGN KEY (id_treinador) REFERENCES treinadores(id), "
 					+ "FOREIGN KEY (id_atleta) REFERENCES atletas(id))";
 			bancoDados.execSQL(sql);
@@ -135,10 +219,10 @@ public class HomeCoachActivity extends Activity {
 		}
 	}
 	
-	private boolean buscarDados(){
+	private boolean buscarDados(String tabela, String[] select){
 		try{
-			cursor = bancoDados.query("pessoas", 
-					new String [] {"nome","dataNasc","endereco"}, 
+			cursor = bancoDados.query(tabela, 
+					select, 
 					null,//selection,
 					null,//selectionArgs, 
 					null,//groupBy, 
@@ -158,21 +242,26 @@ public class HomeCoachActivity extends Activity {
 		}
 	}
 	
-	public void mostraProximoRegistro(){
+	private boolean buscarDados(String tabela, String[] select, String where){
 		try{
-			cursor.moveToNext();
-			mostrarDados();
+			cursor = bancoDados.query(tabela, 
+					select, 
+					where,//selection,
+					null,//selectionArgs, 
+					null,//groupBy, 
+					null,//having,
+					null,//orderBy,
+					null);//Limite de registros retornados
+			
+			int numeroRegistros = cursor.getCount();
+			if(numeroRegistros!=0){
+				cursor.moveToFirst();
+				return true;
+			}else
+				return false;	
 		}catch(Exception erro){
-			exibirMensagem("Erro","Erro ao acessar próximo registro: "+erro.getMessage());
-		}
-	}
-	
-	public void mostraRegistroAnterior(){
-		try{
-			cursor.moveToPrevious();
-			mostrarDados();
-		}catch(Exception erro){
-			exibirMensagem("Erro","Erro ao acessar registro anterior: "+erro.getMessage());
+			exibirMensagem("Erro banco.", "Erro ao buscar dados no banco: " + erro.getMessage());
+			return false;
 		}
 	}
 	
@@ -182,15 +271,26 @@ public class HomeCoachActivity extends Activity {
 					+ "('Manoel Neto', '14/07/1977', 'Rua Rochael Tantan n 38 - Salvador BA'), "
 					+ "('Thalita Andrade', '09/11/1988', 'Rua Itambém Ticotico - Salvador BA'), "
 					+ "('Helder Carvalho', '11/12/1995', 'Rua Circo Pegafogo - Salvador BA'),"
-					+ "('Lucas Augusto', '30/03/1956', 'Rua Vandré Datena - São Paulo SP')";*/
+					+ "('Lucas Augusto', '30/03/1956', 'Rua Vandré Datena - São Paulo SP')";
 			String sql = "INSERT INTO premios (id_atleta, nome, tipo) values "
 					+ "(1, 'Olimpiadas 2006', 0), "
 					+ "(1, 'Olimpiadas 2007', 2), "
 					+ "(1, 'Olimpiadas 2008', 2), "
 					+ "(1, 'Rio 2011', 1)";
-			bancoDados.execSQL(sql);
+			String sql = "INSERT INTO atletas (id, peso, altura) values "
+					+ "(1, 77.6, 1.82), "
+					+ "(4, 67.8, 1.75)";*/
+			/*String sql = "INSERT INTO treinadores (id, numero_atletas) values "
+					+ "(2, 0), "
+					+ "(3, 0)";
 			
-			exibirMensagem("Banco", "Dados gravados com sucesso!");
+			String sql = "INSERT INTO treinos (id_treinador, id_atleta, tipo_nado, "
+					+ "metros, tempo, data, hora) values "
+					+ "(2, 1, 'crawl', 55.4, '01:36', '12/12/2013', '14:35:55'), "
+					+ "(2, 4, 'borboleta', 30.5, '0:51', '12/12/2013', '14:50:33')";
+			bancoDados.execSQL(sql);*/
+			
+			//exibirMensagem("Banco", "Dados gravados com sucesso!");
 		}catch(Exception erro){
 			exibirMensagem("Erro","Erro ao gravar dados: " + erro.getMessage());
 		}
