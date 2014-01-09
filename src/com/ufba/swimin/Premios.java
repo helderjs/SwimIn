@@ -3,10 +3,12 @@ package com.ufba.swimin;
 import android.os.Bundle;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.view.Menu;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -77,18 +79,29 @@ public class Premios extends Activity {
 				 * se for 1, é bronze; se for 2, ouro.
 				 * */
 				
+				medalha.setTag(cursor.getPosition());
+				
 				switch(cursor.getInt(cursor.getColumnIndex("tipo"))){
 				case 0: medalha.setImageResource(R.drawable.silver_medal);
 					medalha.setLayoutParams(ivMedalha.getLayoutParams());
 					tbRow.addView(medalha);
+					
+					eventoClicaMedalha(medalha,"Medalha de prata");
+					
 					break;
 				case 1: medalha.setImageResource(R.drawable.bronze_medal);
 					medalha.setLayoutParams(ivMedalha.getLayoutParams());
 					tbRow.addView(medalha);
+					
+					eventoClicaMedalha(medalha,"Medalha de bronze");
+					
 					break;
 				case 2: medalha.setImageResource(R.drawable.gold_medal);
 					medalha.setLayoutParams(ivMedalha.getLayoutParams());
 					tbRow.addView(medalha);
+					
+					eventoClicaMedalha(medalha,"Medalha de ouro");
+					
 					break;
 				}
 				cursor.moveToNext();				
@@ -136,6 +149,10 @@ public class Premios extends Activity {
 				
 				final ImageView medalha = new ImageView(Premios.this);
 				
+				//A posição da nova medalha será a última posição + 1
+				cursor.moveToLast();
+				medalha.setTag(cursor.getPosition()+1);
+				
 				//Captura o índice do radioButton selecionado
 				
 				RadioGroup rgMedalha = (RadioGroup) findViewById(R.id.rgMedalha);
@@ -148,18 +165,30 @@ public class Premios extends Activity {
 					tbRow.addView(medalha);
 					count++;
 					gravarMedalhaBanco(1,etNome.getText().toString(),rbSelecionado);
+					buscarDados();
+					
+					eventoClicaMedalha(medalha, "Medalha de prata");
+					
 					break;
 				case 1: medalha.setImageResource(R.drawable.bronze_medal);
 					medalha.setLayoutParams(ivMedalha.getLayoutParams());
 					tbRow.addView(medalha);
 					count++;
 					gravarMedalhaBanco(1,etNome.getText().toString(),rbSelecionado);
+					buscarDados();
+					
+					eventoClicaMedalha(medalha, "Medalha de bronze");
+					
 					break;
 				case 2: medalha.setImageResource(R.drawable.gold_medal);
 					medalha.setLayoutParams(ivMedalha.getLayoutParams());
 					tbRow.addView(medalha);
 					count++;
 					gravarMedalhaBanco(1,etNome.getText().toString(),rbSelecionado);
+					buscarDados();
+					
+					eventoClicaMedalha(medalha, "Medalha de ouro");
+					
 					break;
 				default: exibirMensagem("Atenção", "É preciso selecionar o tipo de medalha");
 				}
@@ -172,7 +201,7 @@ public class Premios extends Activity {
 	private boolean buscarDados(){
 		try{
 			cursor = bancoDados.query("premios", 
-					new String [] {"id_atleta","nome","tipo"}, 
+					new String [] {"id","id_atleta","nome","tipo"}, 
 					"id_atleta = 1",//selection,
 					null,//selectionArgs, 
 					null,//groupBy, 
@@ -211,12 +240,58 @@ public class Premios extends Activity {
 		return true;
 	}
 	
+	//Exibe caixa de diálogo com um único botão
+	
 	public void exibirMensagem(String titulo, String texto){
 		AlertDialog.Builder mensagem = new AlertDialog.Builder(Premios.this);
 		mensagem.setTitle(titulo);
 		mensagem.setMessage(texto);
 		mensagem.setNeutralButton("Ok", null);
 		mensagem.show();
+	}
+	
+	// Exibe caixa de diálogo com botão extra; é necessário passar o evento listener
+	
+	public void exibirMensagem(String titulo, String texto, String extraButton, 
+			DialogInterface.OnClickListener listener){
+		AlertDialog.Builder mensagem = new AlertDialog.Builder(Premios.this);
+		mensagem.setTitle(titulo);
+		mensagem.setMessage(texto);
+		mensagem.setNeutralButton("Ok", null);
+		mensagem.setNegativeButton(extraButton, listener);
+		mensagem.show();
+	}
+	
+	//Método utilizado para lidar com o evento de click nas medalhas
+	
+	public void eventoClicaMedalha(ImageView medalha, String tipoMedalha){
+		final String tipo = tipoMedalha;
+		
+		medalha.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				try{
+					final ImageView mdAux = (ImageView) v;
+					cursor.moveToPosition((Integer)v.getTag());
+					exibirMensagem(tipo, "Evento: "
+							+cursor.getString(cursor.getColumnIndex("nome")),
+							"Remover", new DialogInterface.OnClickListener() {
+								
+								@Override
+								public void onClick(DialogInterface arg0, int arg1) {
+									mdAux.setVisibility(View.GONE);
+									bancoDados.delete("premios", 
+											"id = "+Integer.toString(cursor.getInt(
+													cursor.getColumnIndex("id"))), 
+											null);
+								}
+							});
+				}catch(Exception erro){
+					exibirMensagem("Erro","Erro: "+erro.getMessage());
+				}
+			}
+		});
 	}
 	
 }
