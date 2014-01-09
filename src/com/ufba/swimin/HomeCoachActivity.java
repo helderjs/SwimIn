@@ -171,7 +171,7 @@ public class HomeCoachActivity extends Activity {
 			//Cria ou abre o banco
 			bancoDados = openOrCreateDatabase("bancoSwing", MODE_WORLD_READABLE, null);
 			
-			//bancoDados.execSQL("DROP TABLE IF EXISTS treinos");
+			//bancoDados.execSQL("DROP TABLE IF EXISTS atletas");
 			
 			String sql = "CREATE TABLE IF NOT EXISTS pessoas "
 					+ "(id INTEGER PRIMARY KEY AUTOINCREMENT, nome TEXT, data_nasc TEXT, endereco TEXT)";
@@ -279,7 +279,7 @@ public class HomeCoachActivity extends Activity {
 					+ "(1, 'Rio 2011', 1)";
 			String sql = "INSERT INTO atletas (id, peso, altura) values "
 					+ "(1, 77.6, 1.82), "
-					+ "(4, 67.8, 1.75)";*/
+					+ "(4, 67.8, 1.75)";
 			/*String sql = "INSERT INTO treinadores (id, numero_atletas) values "
 					+ "(2, 0), "
 					+ "(3, 0)";
@@ -288,7 +288,15 @@ public class HomeCoachActivity extends Activity {
 					+ "metros, tempo, data, hora) values "
 					+ "(2, 1, 'crawl', 55.4, '01:36', '12/12/2013', '14:35:55'), "
 					+ "(2, 4, 'borboleta', 30.5, '0:51', '12/12/2013', '14:50:33')";
-			bancoDados.execSQL(sql);*/
+			String sql = "INSERT INTO atletas_treinadores (id_atleta, id_treinador) values "
+					+ "(1, 2), "
+					+ "(4, 2)";
+			String sql = "INSERT INTO pessoas (nome, data_nasc, endereco) values "
+					+ "('Caio José', '30/01/1980', 'Rua Manoel Tavares - Salvador BA')";
+			bancoDados.execSQL(sql);
+			sql = "INSERT INTO atletas (id, peso, altura) values "
+					+ "(5, 60.6, 1.68)";
+			bancoDados.execSQL(sql);	*/	
 			
 			//exibirMensagem("Banco", "Dados gravados com sucesso!");
 		}catch(Exception erro){
