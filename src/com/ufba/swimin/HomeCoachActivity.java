@@ -28,8 +28,8 @@ public class HomeCoachActivity extends Activity {
 		setContentView(R.layout.home_coach);
 		
 		abreOuCriaBanco();
-		init();		//Carrega as informações na tela
 		//gravarRegistro();
+		init();		//Carrega as informações na tela
 		
 		btPerfil = (ImageButton) findViewById(R.id.btPerfil);
 		btUsuarios = (ImageButton) findViewById(R.id.btUsuarios);
@@ -171,7 +171,12 @@ public class HomeCoachActivity extends Activity {
 			//Cria ou abre o banco
 			bancoDados = openOrCreateDatabase("bancoSwing", MODE_WORLD_READABLE, null);
 			
+			//bancoDados.execSQL("DROP TABLE IF EXISTS pessoas");
 			//bancoDados.execSQL("DROP TABLE IF EXISTS atletas");
+			//bancoDados.execSQL("DROP TABLE IF EXISTS treinadores");
+			//bancoDados.execSQL("DROP TABLE IF EXISTS atletas_treinadores");
+			//bancoDados.execSQL("DROP TABLE IF EXISTS treinos");
+			//bancoDados.execSQL("DROP TABLE IF EXISTS premios");
 			
 			String sql = "CREATE TABLE IF NOT EXISTS pessoas "
 					+ "(id INTEGER PRIMARY KEY AUTOINCREMENT, nome TEXT, data_nasc TEXT, endereco TEXT)";
@@ -267,36 +272,94 @@ public class HomeCoachActivity extends Activity {
 	
 	public void gravarRegistro(){
 		try{
-			/*String sql = "INSERT INTO pessoas (nome, data_nasc, endereco) values "
-					+ "('Manoel Neto', '14/07/1977', 'Rua Rochael Tantan n 38 - Salvador BA'), "
-					+ "('Thalita Andrade', '09/11/1988', 'Rua Itambém Ticotico - Salvador BA'), "
-					+ "('Helder Carvalho', '11/12/1995', 'Rua Circo Pegafogo - Salvador BA'),"
-					+ "('Lucas Augusto', '30/03/1956', 'Rua Vandré Datena - São Paulo SP')";
-			String sql = "INSERT INTO premios (id_atleta, nome, tipo) values "
-					+ "(1, 'Olimpiadas 2006', 0), "
-					+ "(1, 'Olimpiadas 2007', 2), "
-					+ "(1, 'Olimpiadas 2008', 2), "
-					+ "(1, 'Rio 2011', 1)";
-			String sql = "INSERT INTO atletas (id, peso, altura) values "
-					+ "(1, 77.6, 1.82), "
-					+ "(4, 67.8, 1.75)";
-			/*String sql = "INSERT INTO treinadores (id, numero_atletas) values "
-					+ "(2, 0), "
-					+ "(3, 0)";
-			
-			String sql = "INSERT INTO treinos (id_treinador, id_atleta, tipo_nado, "
-					+ "metros, tempo, data, hora) values "
-					+ "(2, 1, 'crawl', 55.4, '01:36', '12/12/2013', '14:35:55'), "
-					+ "(2, 4, 'borboleta', 30.5, '0:51', '12/12/2013', '14:50:33')";
-			String sql = "INSERT INTO atletas_treinadores (id_atleta, id_treinador) values "
-					+ "(1, 2), "
-					+ "(4, 2)";
 			String sql = "INSERT INTO pessoas (nome, data_nasc, endereco) values "
+					+ "('Manoel Neto', '14/07/1977', 'Rua Rochael Tantan n 38 - Salvador BA')";
+					//+ "('Thalita Andrade', '09/11/1988', 'Rua Itambém Ticotico - Salvador BA')";
+					//+ "('Helder Carvalho', '11/12/1995', 'Rua Circo Pegafogo - Salvador BA')";
+					//+ "('Lucas Augusto', '30/03/1956', 'Rua Vandré Datena - São Paulo SP')";
+			bancoDados.execSQL(sql);
+			sql = "INSERT INTO pessoas (nome, data_nasc, endereco) values "
+					//+ "('Manoel Neto', '14/07/1977', 'Rua Rochael Tantan n 38 - Salvador BA')";
+					+ "('Thalita Andrade', '09/11/1988', 'Rua Itambém Ticotico - Salvador BA')";
+					//+ "('Helder Carvalho', '11/12/1995', 'Rua Circo Pegafogo - Salvador BA')";
+					//+ "('Lucas Augusto', '30/03/1956', 'Rua Vandré Datena - São Paulo SP')";
+			bancoDados.execSQL(sql);
+			sql = "INSERT INTO pessoas (nome, data_nasc, endereco) values "
+					//+ "('Manoel Neto', '14/07/1977', 'Rua Rochael Tantan n 38 - Salvador BA')";
+					//+ "('Thalita Andrade', '09/11/1988', 'Rua Itambém Ticotico - Salvador BA')";
+					+ "('Helder Carvalho', '11/12/1995', 'Rua Circo Pegafogo - Salvador BA')";
+					//+ "('Lucas Augusto', '30/03/1956', 'Rua Vandré Datena - São Paulo SP')";
+			bancoDados.execSQL(sql);
+			sql = "INSERT INTO pessoas (nome, data_nasc, endereco) values "
+					//+ "('Manoel Neto', '14/07/1977', 'Rua Rochael Tantan n 38 - Salvador BA')";
+					//+ "('Thalita Andrade', '09/11/1988', 'Rua Itambém Ticotico - Salvador BA')";
+					//+ "('Helder Carvalho', '11/12/1995', 'Rua Circo Pegafogo - Salvador BA')";
+					+ "('Lucas Augusto', '30/03/1956', 'Rua Vandré Datena - São Paulo SP')";
+			bancoDados.execSQL(sql);
+			sql = "INSERT INTO premios(id_atleta, nome, tipo) values "
+					+ "(1, 'Olimpiadas 2006', 0)";
+					//+ "(1, 'Olimpiadas 2007', 2)";
+					//+ "(1, 'Olimpiadas 2008', 2)";
+					//+ "(1, 'Rio 2011', 1)";
+			bancoDados.execSQL(sql);
+			sql = "INSERT INTO premios(id_atleta, nome, tipo) values "
+					//+ "(1, 'Olimpiadas 2006', 0)";
+					+ "(1, 'Olimpiadas 2007', 2)";
+					//+ "(1, 'Olimpiadas 2008', 2)";
+					//+ "(1, 'Rio 2011', 1)";
+			bancoDados.execSQL(sql);
+			sql = "INSERT INTO premios(id_atleta, nome, tipo) values "
+					//+ "(1, 'Olimpiadas 2006', 0)";
+					//+ "(1, 'Olimpiadas 2007', 2)";
+					+ "(1, 'Olimpiadas 2008', 2)";
+					//+ "(1, 'Rio 2011', 1)";
+			bancoDados.execSQL(sql);
+			sql = "INSERT INTO premios(id_atleta, nome, tipo) values "
+					//+ "(1, 'Olimpiadas 2006', 0)";
+					//+ "(1, 'Olimpiadas 2007', 2)";
+					//+ "(1, 'Olimpiadas 2008', 2)";
+					+ "(1, 'Rio 2011', 1)";
+			bancoDados.execSQL(sql);
+			sql = "INSERT INTO atletas (id, peso, altura) values "
+					+ "(1, 77.6, 1.82)";
+					//+ "(4, 67.8, 1.75)";
+			bancoDados.execSQL(sql);
+			sql = "INSERT INTO atletas (id, peso, altura) values "
+					//+ "(1, 77.6, 1.82)";
+					+ "(4, 67.8, 1.75)";
+			bancoDados.execSQL(sql);
+			sql = "INSERT INTO treinadores (id, numero_atletas) values "
+					+ "(2, 0)";
+					//+ "(3, 0)";
+			bancoDados.execSQL(sql);
+			sql = "INSERT INTO treinadores (id, numero_atletas) values "
+					//+ "(2, 0)";
+					+ "(3, 0)";
+			bancoDados.execSQL(sql);
+			sql = "INSERT INTO treinos (id_treinador, id_atleta, tipo_nado, "
+					+ "metros, tempo, data, hora) values "
+					+ "(2, 1, 'crawl', 55.4, '01:36', '12/12/2013', '14:35:55')";
+					//+ "(2, 4, 'borboleta', 30.5, '0:51', '12/12/2013', '14:50:33')";
+			bancoDados.execSQL(sql);
+			sql = "INSERT INTO treinos (id_treinador, id_atleta, tipo_nado, "
+					+ "metros, tempo, data, hora) values "
+					//+ "(2, 1, 'crawl', 55.4, '01:36', '12/12/2013', '14:35:55')";
+					+ "(2, 4, 'borboleta', 30.5, '0:51', '12/12/2013', '14:50:33')";
+			bancoDados.execSQL(sql);
+			sql = "INSERT INTO atletas_treinadores (id_atleta, id_treinador) values "
+					+ "(1, 2)";
+					//+ "(4, 2)";
+			bancoDados.execSQL(sql);
+			sql = "INSERT INTO atletas_treinadores (id_atleta, id_treinador) values "
+					//+ "(1, 2)";
+					+ "(4, 2)";
+			bancoDados.execSQL(sql);
+			sql = "INSERT INTO pessoas (nome, data_nasc, endereco) values "
 					+ "('Caio José', '30/01/1980', 'Rua Manoel Tavares - Salvador BA')";
 			bancoDados.execSQL(sql);
 			sql = "INSERT INTO atletas (id, peso, altura) values "
 					+ "(5, 60.6, 1.68)";
-			bancoDados.execSQL(sql);	*/	
+			bancoDados.execSQL(sql);
 			
 			//exibirMensagem("Banco", "Dados gravados com sucesso!");
 		}catch(Exception erro){

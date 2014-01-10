@@ -8,13 +8,10 @@ import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Chronometer;
-import android.widget.EditText;
-import android.widget.Toast;
 
 public class CronometerActivity  extends Activity {
     Chronometer chronometer;
     Button btControl, btUnsave, btSave;
-    EditText meters;
     long timeWhenPaused = 0;
     boolean pause;
     int currentAction = 1;
@@ -29,7 +26,7 @@ public class CronometerActivity  extends Activity {
         btControl = (Button) findViewById(R.id.btControl);
         btUnsave = (Button) findViewById(R.id.btUnsave);
         btSave = (Button) findViewById(R.id.btSave);
-        meters = (EditText) findViewById(R.id.meters);
+        //meters = (EditText) findViewById(R.id.meters);
 
         btControl.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -39,12 +36,12 @@ public class CronometerActivity  extends Activity {
                         if (pause) {
                             chronometer.setBase(SystemClock.elapsedRealtime() + timeWhenPaused);
                         } else {
-                            if (meters.getText().toString().equals("")) {
+                            /*if (meters.getText().toString().equals("")) {
                                 Toast.makeText(arg0.getContext(), "Defina os metros", Toast.LENGTH_LONG).show();
                                 return;
-                            }
+                            }*/
 
-                            meters.setEnabled(false);
+                           // meters.setEnabled(false);
                             chronometer.setBase(SystemClock.elapsedRealtime());
                         }
 
@@ -77,7 +74,7 @@ public class CronometerActivity  extends Activity {
                 timeWhenPaused = 0;
                 pause = false;
                 btControl.setText("Iniciar");
-                meters.setEnabled(true);
+                //meters.setEnabled(true);
                 currentAction = 1;
             }
         });
@@ -89,13 +86,21 @@ public class CronometerActivity  extends Activity {
                 timeWhenPaused = 0;
                 pause = false;
                 btControl.setText("Iniciar");
-                meters.setEnabled(true);
+                //meters.setEnabled(true);
                 currentAction = 1;
 
                 Intent i = new Intent(getApplicationContext(), TrainingActivity.class);
-                i.putExtra("meters", meters.getText().toString());
-                i.putExtra("time", chronometer.getBase());
-                startActivity(i);
+                //i.putExtra("meters", meters.getText().toString());
+                //i.putExtra("time", chronometer.getBase());
+                //startActivity(i);
+                
+                /*Não é preciso criar um novo intent para voltar - como feito acima -,
+                 * apenas finalizar o intent atual, gravando as informações no banco*/
+                
+                //gravaDadosEmBanco();
+                
+                finish();
+                
             }
         });
     }

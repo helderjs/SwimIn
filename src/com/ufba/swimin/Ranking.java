@@ -1,6 +1,5 @@
 package com.ufba.swimin;
 
-import android.app.ActionBar;
 import android.os.Bundle;
 import android.app.Activity;
 import android.view.Menu;
@@ -12,9 +11,6 @@ public class Ranking  extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.ranking);
-
-        ActionBar actionBar = getActionBar();
-        actionBar.setDisplayHomeAsUpEnabled(true);
 
         TabHost tabhost = (TabHost)findViewById(R.id.tab_ranking);
         tabhost.setup();

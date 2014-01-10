@@ -15,28 +15,6 @@
 
     <LinearLayout
         android:orientation="horizontal"
-        android:layout_width="fill_parent"
-        android:layout_height="67dp">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingLeft="20dp"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="Metros: "
-            android:id="@+id/textView3" />
-
-        <EditText
-            android:layout_width="103dp"
-            android:layout_height="wrap_content"
-            android:inputType="number"
-            android:ems="10"
-            android:id="@+id/meters" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:orientation="horizontal"
         android:layout_width="wrap_content"
         android:layout_height="79dp"
         android:id="@+id/linearLayout"

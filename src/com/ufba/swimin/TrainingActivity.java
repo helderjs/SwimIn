@@ -1,6 +1,5 @@
 package com.ufba.swimin;
 
-import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -23,8 +22,8 @@ public class TrainingActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.training);
 
-        ActionBar actionBar = getActionBar();
-        actionBar.setDisplayHomeAsUpEnabled(true);
+        //ActionBar actionBar = getActionBar();
+        //actionBar.setDisplayHomeAsUpEnabled(true);
 
         distancia = (EditText) findViewById(R.id.distancia);
 		btStart = (Button) findViewById(R.id.btStart);
@@ -36,7 +35,8 @@ public class TrainingActivity extends Activity {
                     Toast.makeText(v.getContext(), "Defina os metros", Toast.LENGTH_LONG).show();
                     return;
                 } else{
-                    Intent intent = new Intent(context, CronometerActivity.class);
+                	//setContentView(R.layout.cronometer);                	
+                	Intent intent = new Intent(context, CronometerActivity.class);
                     startActivity(intent);
                 }
             }
