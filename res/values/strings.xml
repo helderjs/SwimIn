@@ -10,19 +10,20 @@
     <string name="estatisticas">Estatísticas</string>
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
+
     <string-array name="tipo_listagem">
-	<item>Todos</item>
-	<item>Atletas</item>
-	<item>Equipe</item>
-	<item>Treinador</item>
-	</string-array>
-	<string-array name="lista_usuarios">
-	<item>André Alann</item>
-	<item>André João</item>
-	<item>André Martins</item>
-	<item>André Nunes</item>
-	<item>André Loiola</item>
-	</string-array>
+        <item>Todos</item>
+        <item>Atletas</item>
+        <item>Equipe</item>
+        <item>Treinador</item>
+    </string-array>
+    <string-array name="lista_usuarios">
+        <item>André Alann</item>
+        <item>André João</item>
+        <item>André Martins</item>
+        <item>André Nunes</item>
+        <item>André Loiola</item>
+    </string-array>
     <string-array name="lista_nados">
         <item>Crawl</item>
         <item>Costas</item>
@@ -35,5 +36,7 @@
         <item>Helder</item>
         <item>Lucas</item>
     </string-array>
+
+    <string name="title_activity_edit_profile">Editar Perfil</string>
 
 </resources>

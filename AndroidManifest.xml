@@ -22,49 +22,64 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.ufba.swimin.CronometerActivity"></activity>
-        <activity android:name="com.ufba.swimin.TrainingActivity"
-            	  android:label="@string/treino"
-                  android:parentActivityName="com.ufba.swimin.HomeCoachActivity">
-                  <meta-data
-                    android:name="android.support.PARENT_ACTIVITY"
-                    android:value="com.ufba.swimin.HomeCoachActivity" />
-                  </activity>
-          <activity android:name="com.ufba.swimin.StatisticsActivity"
-            	  android:label="@string/estatisticas"
-                  android:parentActivityName="com.ufba.swimin.ProfileActivity">
-                  <meta-data
-                    android:name="android.support.PARENT_ACTIVITY"
-                    android:value="com.ufba.swimin.ProfileActivity" />
-            	  </activity> 
-        <activity android:name="com.ufba.swimin.ProfileActivity"
-                  android:label="@string/perfil"
-                  android:parentActivityName="com.ufba.swimin.HomeCoachActivity">
-                  <meta-data
-                    android:name="android.support.PARENT_ACTIVITY"
-                    android:value="com.ufba.swimin.HomeCoachActivity" />
-                  </activity>
-        <activity android:name="com.ufba.swimin.Premios"
-            	  android:label="@string/premios"
-            	  android:parentActivityName="com.ufba.swimin.ProfileActivity">
-                  <meta-data
-                    android:name="android.support.PARENT_ACTIVITY"
-                    android:value="com.ufba.swimin.ProfileActivity" />
+        <activity android:name="com.ufba.swimin.CronometerActivity" >
         </activity>
-        <activity android:name="com.ufba.swimin.UserListActivity"
-            	  android:label="@string/usuarios"
-                  android:parentActivityName="com.ufba.swimin.HomeCoachActivity">
-                  <meta-data
-                    android:name="android.support.PARENT_ACTIVITY"
-                    android:value="com.ufba.swimin.HomeCoachActivity" />
-            	  </activity>
-        <activity android:name="com.ufba.swimin.Ranking"
-            	  android:label="@string/ranking"
-                  android:parentActivityName="com.ufba.swimin.HomeCoachActivity">
-                  <meta-data
-                    android:name="android.support.PARENT_ACTIVITY"
-                    android:value="com.ufba.swimin.HomeCoachActivity" />
-                  </activity>
+        <activity
+            android:name="com.ufba.swimin.TrainingActivity"
+            android:label="@string/treino"
+            android:parentActivityName="com.ufba.swimin.HomeCoachActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.ufba.swimin.HomeCoachActivity" />
+        </activity>
+        <activity
+            android:name="com.ufba.swimin.StatisticsActivity"
+            android:label="@string/estatisticas"
+            android:parentActivityName="com.ufba.swimin.ProfileActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.ufba.swimin.ProfileActivity" />
+        </activity>
+        <activity
+            android:name="com.ufba.swimin.ProfileActivity"
+            android:label="@string/perfil"
+            android:parentActivityName="com.ufba.swimin.HomeCoachActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.ufba.swimin.HomeCoachActivity" />
+        </activity>
+        <activity
+            android:name="com.ufba.swimin.Premios"
+            android:label="@string/premios"
+            android:parentActivityName="com.ufba.swimin.ProfileActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.ufba.swimin.ProfileActivity" />
+        </activity>
+        <activity
+            android:name="com.ufba.swimin.UserListActivity"
+            android:label="@string/usuarios"
+            android:parentActivityName="com.ufba.swimin.HomeCoachActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.ufba.swimin.HomeCoachActivity" />
+        </activity>
+        <activity
+            android:name="com.ufba.swimin.Ranking"
+            android:label="@string/ranking"
+            android:parentActivityName="com.ufba.swimin.HomeCoachActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.ufba.swimin.HomeCoachActivity" />
+        </activity>
+        <activity
+            android:name="com.ufba.swimin.EditProfile"
+            android:label="@string/title_activity_edit_profile" 
+            android:parentActivityName="com.ufba.swimin.ProfileActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.ufba.swimin.ProfileActivity" />
+        </activity>
     </application>
 
 </manifest>
