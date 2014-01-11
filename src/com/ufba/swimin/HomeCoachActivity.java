@@ -17,8 +17,13 @@ public class HomeCoachActivity extends Activity {
 	SQLiteDatabase bancoDados = null;
 	Cursor cursor;
 	
-	ImageButton btPerfil, btUsuarios, btTreinos, btRanking;
+	ImageButton btPerfil, btUsuarios, btTreinos, btRanking, btAddAtleta;
 	Context context = this;
+	
+	TextView tvWelcome, tvName1, tvName2, tvDateAndTime1, tvDateAndTime2,
+	tvNado1, tvNado2, tvNado3, tvNado4;
+	
+	String id_treinador = "1";
 	
 	//Home para Treinador
 	
@@ -28,13 +33,9 @@ public class HomeCoachActivity extends Activity {
 		setContentView(R.layout.home_coach);
 		
 		abreOuCriaBanco();
-		//gravarRegistro();
-		init();		//Carrega as informações na tela
-		
-		btPerfil = (ImageButton) findViewById(R.id.btPerfil);
-		btUsuarios = (ImageButton) findViewById(R.id.btUsuarios);
-		btTreinos = (ImageButton) findViewById(R.id.btTreinos);
-		btRanking = (ImageButton) findViewById(R.id.btRanking);
+		gravarRegistro();
+		init();		//Inicializa os elementos (TextView, Button etc)
+		carregaDadosNaTela();
 		
 		btPerfil.setOnClickListener(new View.OnClickListener() {
 			
@@ -45,6 +46,17 @@ public class HomeCoachActivity extends Activity {
 				startActivity(intent);
 			}
 		});
+		
+		btAddAtleta.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View arg0) {
+				//setContentView(R.layout.profile);
+				Intent intent = new Intent(context, AddAtleta.class);
+				startActivity(intent);
+			}
+		});
+		
 		
 		btUsuarios.setOnClickListener(new View.OnClickListener() {
 			
@@ -83,13 +95,17 @@ public class HomeCoachActivity extends Activity {
 		return true;
 	}
 	
+	@Override
+	protected void onRestart() {
+		super.onRestart();
+		carregaDadosNaTela();
+	}
+	
 	/* ---------------------------------------------------------------------
 	 * Carrega os dados da tela - texto de boas-vindas e últimos treinos
 	 */
 	
 	public void init(){
-		TextView tvWelcome, tvName1, tvName2, tvDateAndTime1, tvDateAndTime2,
-			tvNado1, tvNado2, tvNado3, tvNado4;
 		
 		tvWelcome = (TextView) findViewById(R.id.tvWelcome);
 		tvName1 = (TextView) findViewById(R.id.tvName1);
@@ -101,8 +117,14 @@ public class HomeCoachActivity extends Activity {
 		tvNado3 = (TextView) findViewById(R.id.tvNado3);
 		tvNado4 = (TextView) findViewById(R.id.tvNado4);
 		
-		// id_treinador será utilizado provisoriamente, enquanto nenhum login é implementado
-		String id_treinador = "2";
+		btPerfil = (ImageButton) findViewById(R.id.btPerfil);
+		btAddAtleta = (ImageButton) findViewById(R.id.btAddAtleta);
+		btUsuarios = (ImageButton) findViewById(R.id.btUsuarios);
+		btTreinos = (ImageButton) findViewById(R.id.btTreinos);
+		btRanking = (ImageButton) findViewById(R.id.btRanking);
+	}
+	
+	public void carregaDadosNaTela(){
 		
 		// Busca o nome do treinador para exibir na tela de boas-vindas
 		buscarDados("pessoas", new String[]{"nome"},
@@ -171,12 +193,8 @@ public class HomeCoachActivity extends Activity {
 			//Cria ou abre o banco
 			bancoDados = openOrCreateDatabase("bancoSwing", MODE_WORLD_READABLE, null);
 			
-			//bancoDados.execSQL("DROP TABLE IF EXISTS pessoas");
-			//bancoDados.execSQL("DROP TABLE IF EXISTS atletas");
-			//bancoDados.execSQL("DROP TABLE IF EXISTS treinadores");
-			//bancoDados.execSQL("DROP TABLE IF EXISTS atletas_treinadores");
-			//bancoDados.execSQL("DROP TABLE IF EXISTS treinos");
-			//bancoDados.execSQL("DROP TABLE IF EXISTS premios");
+			//Código usado pra limpar as tabelas, quando necessário
+			//limparTabelas();
 			
 			String sql = "CREATE TABLE IF NOT EXISTS pessoas "
 					+ "(id INTEGER PRIMARY KEY AUTOINCREMENT, nome TEXT, data_nasc TEXT, endereco TEXT)";
@@ -214,6 +232,15 @@ public class HomeCoachActivity extends Activity {
 		}catch(Exception erro){
 			exibirMensagem("Erro banco", "Erro ao abrir ou criar banco: " + erro.getMessage());
 		}
+	}
+	
+	public void limparTabelas(){
+		bancoDados.execSQL("DROP TABLE IF EXISTS pessoas");
+		bancoDados.execSQL("DROP TABLE IF EXISTS atletas");
+		bancoDados.execSQL("DROP TABLE IF EXISTS treinadores");
+		bancoDados.execSQL("DROP TABLE IF EXISTS atletas_treinadores");
+		bancoDados.execSQL("DROP TABLE IF EXISTS treinos");
+		bancoDados.execSQL("DROP TABLE IF EXISTS premios");
 	}
 	
 	public void fechaBanco(){
@@ -272,7 +299,17 @@ public class HomeCoachActivity extends Activity {
 	
 	public void gravarRegistro(){
 		try{
-			String sql = "INSERT INTO pessoas (nome, data_nasc, endereco) values "
+			if(!buscarDados("pessoas", new String[]{"id"})){
+				//O aplicativo é executado pela primeira vez
+				String sql = "INSERT INTO pessoas (nome, data_nasc, endereco) values "
+						+ "('Usuario', '00/00/0000', 'Cidade -')";
+				bancoDados.execSQL(sql);
+				sql = "INSERT INTO treinadores (id, numero_atletas) values "
+						+ "(1, 0)";
+				bancoDados.execSQL(sql);
+			}			
+			
+			/*String sql = "INSERT INTO pessoas (nome, data_nasc, endereco) values "
 					+ "('Manoel Neto', '14/07/1977', 'Rua Rochael Tantan n 38 - Salvador BA')";
 					//+ "('Thalita Andrade', '09/11/1988', 'Rua Itambém Ticotico - Salvador BA')";
 					//+ "('Helder Carvalho', '11/12/1995', 'Rua Circo Pegafogo - Salvador BA')";
@@ -361,7 +398,7 @@ public class HomeCoachActivity extends Activity {
 					+ "(5, 60.6, 1.68)";
 			bancoDados.execSQL(sql);
 			
-			//exibirMensagem("Banco", "Dados gravados com sucesso!");
+			//exibirMensagem("Banco", "Dados gravados com sucesso!");*/
 		}catch(Exception erro){
 			exibirMensagem("Erro","Erro ao gravar dados: " + erro.getMessage());
 		}

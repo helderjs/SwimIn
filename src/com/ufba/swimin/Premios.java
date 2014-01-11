@@ -44,7 +44,7 @@ public class Premios extends Activity {
 	
 	int index = 0; //indice do atleta selecionado
 	
-	String id_treinador = "2";
+	String id_treinador = "1";
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

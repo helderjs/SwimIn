@@ -38,5 +38,6 @@
     </string-array>
 
     <string name="title_activity_edit_profile">Editar Perfil</string>
+    <string name="title_activity_add_atleta">Adicionar Atleta</string>
 
 </resources>

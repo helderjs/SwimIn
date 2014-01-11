@@ -53,8 +53,8 @@ public class UserListActivity extends Activity {
 				
 				lvArray.clear();
 				lvArrayId.clear();
-								
-				int	pos = spnCategory.getSelectedItemPosition();	
+				
+				/*int	pos = spnCategory.getSelectedItemPosition();	
 							
 				switch(pos){
 				//Categoria: todos (índice 0)
@@ -66,14 +66,14 @@ public class UserListActivity extends Activity {
 					}
 					break;
 			    //Categoria: atletas (índice 1)
-				case 1: if(etNome.getText().toString().equals("")){
+				case 1: */if(etNome.getText().toString().equals("")){
 						buscarDados("SELECT p.id, nome FROM pessoas AS p, atletas AS a " 
 								+ "WHERE p.id = a.id");		
 					}else{
 						buscarDados("SELECT p.id, nome FROM pessoas AS p, atletas AS a "
 								+ "WHERE p.id = a.id "
 								+ "AND nome LIKE '%"+etNome.getText().toString()+"%'");
-					}
+					}/*
 					break;
 			    //Categoria: equipe (índice 2)
 				case 2: if(etNome.getText().toString().equals("")){
@@ -97,7 +97,7 @@ public class UserListActivity extends Activity {
 								+ "AND nome LIKE '%"+etNome.getText().toString()+"%'");
 					}
 					break;
-				}
+				}*/
 				
 				if(cursor.getCount()>0){
 					do{

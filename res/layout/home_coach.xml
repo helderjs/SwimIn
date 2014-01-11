@@ -9,18 +9,13 @@
         android:layout_height="40dp" >
 
         <TextView
+            android:id="@+id/tvWelcome"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
-            android:text="Bem-vindo Joel Santana"
-            android:id="@+id/tvWelcome"
+            android:text="Bem-vindo -"
             android:textSize="24dp"
-            android:textStyle="bold" />
-
-        <Button
-            android:id="@+id/button"
-            android:layout_width="80dp"
-            android:layout_height="wrap_content"
-            android:text="Sair" />
+            android:textStyle="bold" 
+            android:layout_marginRight="10dp"/>
 
     </LinearLayout>
 
@@ -43,7 +38,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="70dp"
             android:layout_marginTop="5dp"
-            android:text="João Mário"
+            android:text="-"
             android:textSize="20dp" />
 
         <TextView
@@ -52,7 +47,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="70dp"
             android:layout_marginTop="10dp"
-            android:text="04/11/2013 - 08:30:00"
+            android:text="-"
             android:textSize="18dp" />
 
         <TextView
@@ -61,7 +56,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="90dp"
             android:layout_marginTop="2dp"
-            android:text="Crawl: 40:23"
+            android:text="-"
             android:textSize="18dp" />
 
         <TextView
@@ -70,7 +65,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="90dp"
             android:layout_marginTop="2dp"
-            android:text="Costas: 15:46"
+            android:text="-"
             android:textSize="18dp" />
 
         <TextView
@@ -79,7 +74,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="70dp"
             android:layout_marginTop="15dp"
-            android:text="Lucas Rolemberg"
+            android:text="-"
             android:textSize="20dp" />
 
         <TextView
@@ -88,7 +83,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="70dp"
             android:layout_marginTop="10dp"
-            android:text="23/10/2013 - 14:20:00"
+            android:text="-"
             android:textSize="18dp" />
 
         <TextView
@@ -97,7 +92,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="90dp"
             android:layout_marginTop="2dp"
-            android:text="Borboleta: 22:43"
+            android:text="-"
             android:textSize="18dp" />
 
         <TextView
@@ -106,7 +101,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="90dp"
             android:layout_marginTop="2dp"
-            android:text="Crawl: 12:04"
+            android:text="-"
             android:textSize="18dp" />
 
     </LinearLayout>
@@ -118,29 +113,36 @@
         android:id="@+id/linearLayout">
 
         <ImageButton
-            android:layout_width="80dp"
-            android:layout_height="80dp"
             android:id="@+id/btPerfil"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
             android:src="@android:drawable/ic_menu_myplaces" />
 
         <ImageButton
+            android:id="@+id/btAddAtleta"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:layout_marginLeft="0dp"
+            android:src="@drawable/ic_action_user_add" />
+
+        <ImageButton
             android:id="@+id/btUsuarios"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
             android:layout_marginLeft="0dp"
             android:src="@android:drawable/ic_menu_my_calendar" />
 
         <ImageButton
             android:id="@+id/btTreinos"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
             android:layout_marginLeft="0dp"
             android:src="@android:drawable/ic_menu_recent_history" />
 
         <ImageButton
             android:id="@+id/btRanking"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
             android:layout_marginLeft="0dp"
             android:src="@android:drawable/ic_menu_sort_by_size" />
 
