@@ -1,46 +1,47 @@
 package com.ufba.swimin;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.Intent;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.ufba.swimin.helper.DatabaseHelper;
+import com.ufba.swimin.model.Athlete;
+import com.ufba.swimin.model.Coach;
+
+import java.text.SimpleDateFormat;
+
 public class ProfileActivity extends Activity {
+    DatabaseHelper db;
+    Bundle extras;
     Button btStatistics, btPremios, btEditarPerfil;
-    TextView tvNome, tvIdade, tvEndereco, tvPeso, tvAltura, tvTreinador;
-    
-    SQLiteDatabase bancoDados = null;
-    Cursor cursor;
+    TextView tvNome, tvIdade, tvPeso, tvAltura;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.profile);
 
+        extras = getIntent().getExtras();
+
         btStatistics = (Button) findViewById(R.id.button);
         btPremios = (Button) findViewById(R.id.button2);
         btEditarPerfil = (Button) findViewById(R.id.btEditar);
         tvNome = (TextView) findViewById(R.id.tvNome);
         tvIdade = (TextView) findViewById(R.id.tvIdade);
-        tvEndereco = (TextView) findViewById(R.id.tvEndereco);
         tvPeso = (TextView) findViewById(R.id.tvPeso);
         tvAltura = (TextView) findViewById(R.id.tvAltura);
-        tvTreinador = (TextView) findViewById(R.id.tvTreinador);
-        
-        abreBanco();
+
         carregaDadosNaTela();
 
         btStatistics.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View arg0) {
                 Intent i = new Intent(getApplicationContext(), StatisticsActivity.class);
-                //i.putExtra("meters", meters.getText().toString());
+                i.putExtra("person_id", extras.getString("person_id"));
                 startActivity(i);
             }
         });
@@ -48,9 +49,8 @@ public class ProfileActivity extends Activity {
         btPremios.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //txtNome.setText("Hi there, Thalita!");
                 Intent i = new Intent(getApplicationContext(), Premios.class);
-                //i.putExtra("meters", meters.getText().toString());
+                i.putExtra("person_id", extras.getString("person_id"));
                 startActivity(i);
             }
         });
@@ -59,6 +59,8 @@ public class ProfileActivity extends Activity {
 			@Override
 			public void onClick(View arg0) {
 				Intent i = new Intent(getApplicationContext(), EditProfile.class);
+                i.putExtra("person_id", extras.getString("person_id"));
+                i.putExtra("person_type", extras.getString("person_type"));
                 startActivity(i);
 			}
 		});
@@ -77,50 +79,41 @@ public class ProfileActivity extends Activity {
 		return true;
 	}
 	
-	public void abreBanco(){
-		bancoDados = openOrCreateDatabase("bancoSwing", MODE_WORLD_READABLE, null);
-	}
-	
 	public void carregaDadosNaTela(){
-		if(buscarDados("pessoas",new String[]{"id","nome","data_nasc","endereco"},"id = 1")){
-			tvNome.setText(cursor.getString(cursor.getColumnIndex("nome")));
-			tvIdade.setText(cursor.getString(cursor.getColumnIndex("data_nasc")));
-			tvEndereco.setText(cursor.getString(cursor.getColumnIndex("endereco")));
-			//Nessa versão do programa, não teremos atletas utilizando o aplicativo
-			tvPeso.setVisibility(View.GONE);
-			tvAltura.setVisibility(View.GONE);
-			tvTreinador.setVisibility(View.GONE);
-		}
-	}
-	
-	private boolean buscarDados(String tabela, String[] select, String where){
-		try{
-			cursor = bancoDados.query(tabela, 
-					select, 
-					where,//selection,
-					null,//selectionArgs, 
-					null,//groupBy, 
-					null,//having,
-					null,//orderBy,nome
-					null);//Limite de registros retornados
-			
-			int numeroRegistros = cursor.getCount();
-			if(numeroRegistros!=0){
-				cursor.moveToFirst();
-				return true;
-			}else
-				return false;	
-		}catch(Exception erro){
-			exibirMensagem("Erro banco.", "Erro ao buscar dados no banco: " + erro.getMessage());
-			return false;
-		}
-	}
-	
-	public void exibirMensagem(String titulo, String texto){
-		AlertDialog.Builder mensagem = new AlertDialog.Builder(ProfileActivity.this);
-		mensagem.setTitle(titulo);
-		mensagem.setMessage(texto);
-		mensagem.setNeutralButton("Ok", null);
-		mensagem.show();
+        db = new DatabaseHelper(this);
+
+        if (extras.getString("person_type").equals("COACH")) {
+            Coach ps = db.getCoach();
+            tvNome.setText("Nome: " + ps.getName());
+            SimpleDateFormat dt = new SimpleDateFormat("dd/MM/yyyy");
+            tvIdade.setText("Nascimento: " + dt.format(ps.getBirthday()));
+            tvPeso.setVisibility(View.GONE);
+            tvAltura.setVisibility(View.GONE);
+            btStatistics.setVisibility(View.GONE);
+            btPremios.setVisibility(View.GONE);
+        } else {
+            Athlete ps = db.getAthlete(Long.valueOf(extras.getString("person_id")));
+            tvNome.setText("Nome:" + ps.getName());
+            SimpleDateFormat dt = new SimpleDateFormat("dd/MM/yyyy");
+            tvIdade.setText("Nascimento: " + dt.format(ps.getBirthday()));
+            tvPeso.setText("Peso: " + String.valueOf(ps.getWeight()));
+            tvAltura.setText("Altura: "+ String.valueOf(ps.getHeight()));
+        }
+        //tvIdade.setText(extras.getString("person_id"));
+        /*if (person_type == 1) {
+            Coach ps = db.getCoach();
+            tvNome.setText(ps.getName());
+            SimpleDateFormat dt = new SimpleDateFormat("dd/MM/yyyy");
+            tvIdade.setText(dt.format(ps.getBirthday()));
+            tvPeso.setVisibility(View.GONE);
+            tvAltura.setVisibility(View.GONE);
+        } else {
+            Athlete ps = db.getAthlete(person_id);
+            tvNome.setText(String.valueOf(person_id));
+            SimpleDateFormat dt = new SimpleDateFormat("dd/MM/yyyy");
+            tvIdade.setText(dt.format(ps.getBirthday()));
+            tvPeso.setText(String.valueOf(ps.getWeight()));
+            tvAltura.setText(String.valueOf(String.valueOf(person_type)));
+        }*/
 	}
 }

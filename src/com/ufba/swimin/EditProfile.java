@@ -8,97 +8,127 @@ import android.database.sqlite.SQLiteDatabase;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.ufba.swimin.helper.DatabaseHelper;
+import com.ufba.swimin.model.Athlete;
+import com.ufba.swimin.model.Coach;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class EditProfile extends Activity {
+    DatabaseHelper db;
+    Bundle extras;
 
-	SQLiteDatabase bancoDados = null;
-	Cursor cursor;
-	
-	EditText etNome, etDataNasc, etEndereco;
-	Button btSalvar;
+    TextView tvWeight, tvHeight;
+	EditText etName, etBirthday, etWeight, etHeight;
+	Button btSave;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.edit_profile);
-		
-		etNome = (EditText) findViewById(R.id.etNome);
-		etDataNasc = (EditText) findViewById(R.id.etDataNasc);
-		etEndereco = (EditText) findViewById(R.id.etEndereco);
-		btSalvar = (Button) findViewById(R.id.btSalvar);
-		
-		abreBanco();
+
+        db = new DatabaseHelper(this);
+        extras = getIntent().getExtras();
+		etName = (EditText) findViewById(R.id.name);
+		etBirthday = (EditText) findViewById(R.id.birthday);
+        tvWeight = (TextView) findViewById(R.id.title_weight);
+		etWeight = (EditText) findViewById(R.id.weight);
+        tvHeight = (TextView) findViewById(R.id.title_height);
+        etHeight = (EditText) findViewById(R.id.height);
+		btSave = (Button) findViewById(R.id.btSave);
+
 	    carregaDadosNaTela();
-	     
-	    btSalvar.setOnClickListener(new View.OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				try{
-					String sql = "UPDATE pessoas SET nome='"+etNome.getText().toString()+"' "
-							+ "WHERE id=1";
-					bancoDados.execSQL(sql);
-					sql = "UPDATE pessoas SET data_nasc='"+etDataNasc.getText().toString()+"' "
-							+ "WHERE id=1";
-					bancoDados.execSQL(sql);
-					sql = "UPDATE pessoas SET endereco='"+etEndereco.getText().toString()+"' "
-							+ "WHERE id=1";
-					bancoDados.execSQL(sql);
-				}catch(Exception erro){
-					exibirMensagem("Erro", "Erro: "+erro.getMessage());
-				}
-				finish();
-			}
-		});
-	}
 
-	/*@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.edit_profile, menu);
-		return true;
-	}*/
+        btSave.setOnClickListener(new View.OnClickListener() {
 
-	public void abreBanco(){
-		bancoDados = openOrCreateDatabase("bancoSwing", MODE_WORLD_READABLE, null);
+            @Override
+            public void onClick(View v) {
+                if(etName.getText().toString().equals("")){
+                    exibirMensagem("Aviso", "Preencha o nome do atleta.");
+                    return;
+                }
+
+                if(etBirthday.getText().toString().equals("")){
+                    exibirMensagem("Aviso", "Preencha a data de nascimento do atleta.");
+                    return;
+                }
+
+                if (!extras.getString("person_type").equals("COACH")) {
+                    if(etWeight.getText().toString().equals("")){
+                        exibirMensagem("Aviso", "Informe o peso do atleta");
+                        return;
+                    }
+
+                    if(etHeight.getText().toString().equals("")){
+                        exibirMensagem("Aviso", "Informe a altura do atleta");
+                        return;
+                    }
+                }
+
+                Date birthday = new Date();
+                try {
+                    DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+                    birthday = dateFormat.parse(etBirthday.getText().toString());
+                } catch (Exception e) {
+                    exibirMensagem("Aviso:", "Formato de data deve ser d/m/y");
+                }
+
+                if (extras.getString("person_type").equals("COACH")) {
+                    Coach co = new Coach(1, etName.getText().toString(), birthday);
+
+                    db.updateCoach(co);
+                } else {
+                    Athlete ath = new Athlete(
+                        Long.valueOf(extras.getString("person_id")),
+                        etName.getText().toString(),
+                        birthday,
+                        Float.valueOf(etWeight.getText().toString()),
+                        Float.valueOf(etHeight.getText().toString())
+                    );
+
+                    db.updateAthlete(ath);
+                }
+
+                Toast.makeText(getApplicationContext(), "Perfil Atualizado.", Toast.LENGTH_SHORT).show();
+                etName.setText("");
+                etBirthday.setText("");
+                etWeight.setText("");
+                etHeight.setText("");
+                finish();
+            }
+        });
 	}
 	
-	public void carregaDadosNaTela(){
-		if(buscarDados("pessoas",new String[]{"id","nome","data_nasc","endereco"},"id = 1")){
-			etNome.setText(cursor.getString(cursor.getColumnIndex("nome")));
-			etDataNasc.setText(cursor.getString(cursor.getColumnIndex("data_nasc")));
-			etEndereco.setText(cursor.getString(cursor.getColumnIndex("endereco")));
-		}
-	}
-	
-	private boolean buscarDados(String tabela, String[] select, String where){
-		try{
-			cursor = bancoDados.query(tabela, 
-					select, 
-					where,//selection,
-					null,//selectionArgs, 
-					null,//groupBy, 
-					null,//having,
-					null,//orderBy,nome
-					null);//Limite de registros retornados
-			
-			int numeroRegistros = cursor.getCount();
-			if(numeroRegistros!=0){
-				cursor.moveToFirst();
-				return true;
-			}else
-				return false;	
-		}catch(Exception erro){
-			exibirMensagem("Erro banco.", "Erro ao buscar dados no banco: " + erro.getMessage());
-			return false;
-		}
+	public void carregaDadosNaTela() {
+        if (extras.getString("person_type").equals("COACH")) {
+            Coach ps = db.getCoach();
+            etName.setText(ps.getName());
+            SimpleDateFormat dt = new SimpleDateFormat("dd/MM/yyyy");
+            etBirthday.setText(dt.format(ps.getBirthday()));
+            tvWeight.setVisibility(View.GONE);
+            tvHeight.setVisibility(View.GONE);
+            etWeight.setVisibility(View.GONE);
+            etHeight.setVisibility(View.GONE);
+        } else {
+            Athlete ps = db.getAthlete(Long.valueOf(extras.getString("person_id")));
+            etName.setText(ps.getName());
+            SimpleDateFormat dt = new SimpleDateFormat("dd/MM/yyyy");
+            etBirthday.setText(dt.format(ps.getBirthday()));
+            etWeight.setText(String.valueOf(ps.getWeight()));
+            etHeight.setText(String.valueOf(ps.getHeight()));
+        }
 	}
 	
 	public void exibirMensagem(String titulo, String texto){
 		AlertDialog.Builder mensagem = new AlertDialog.Builder(EditProfile.this);
 		mensagem.setTitle(titulo);
 		mensagem.setMessage(texto);
-		mensagem.setNeutralButton("Ok", null);
+		mensagem.setNeutralButton("Fechar", null);
 		mensagem.show();
 	}
 	

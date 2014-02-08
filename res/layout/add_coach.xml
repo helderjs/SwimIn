@@ -7,21 +7,21 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:orientation="vertical"
-    tools:context=".EditProfile" >
-
+    tools:context=".AddCoachActivity" >
+    
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content" >
 
         <TextView
-            android:id="@+id/title_name"
+            android:id="@+id/title_coach_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Nome"
             android:textSize="20dp" />
 
         <EditText
-            android:id="@+id/name"
+            android:id="@+id/coach_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -37,14 +37,14 @@
         android:layout_height="wrap_content" >
 
         <TextView
-            android:id="@+id/title_birthday"
+            android:id="@+id/title_coach_birthday"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Data de nasc.:"
             android:textSize="20dp" />
 
         <EditText
-            android:id="@+id/birthday"
+            android:id="@+id/coach_birthday"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -57,53 +57,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" >
 
-        <TextView
-            android:id="@+id/title_weight"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Peso"
-            android:textSize="20dp" />
-
-        <EditText
-            android:id="@+id/weight"
-            android:layout_width="30dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:ems="10"
-            android:inputType="numberDecimal" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
-
-        <TextView
-            android:id="@+id/title_height"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Altura"
-            android:textSize="20dp" />
-
-        <EditText
-            android:id="@+id/height"
-            android:layout_width="30dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:ems="10"
-            android:inputType="numberDecimal" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
-
         <Button
-            android:id="@+id/btSave"
+            android:id="@+id/coach_save"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Atualizar" />
+            android:text="Salvar" />
 
     </LinearLayout>
 

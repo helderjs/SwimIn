@@ -26,8 +26,8 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Data: 21/11/2013"
-                android:id="@+id/textView4"
+                android:text="Data: "
+                android:id="@+id/training_date"
                 android:layout_span="3"
                 android:textSize="18dp" />
         </TableRow>
@@ -48,7 +48,7 @@
             <Spinner
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
-                android:id="@+id/spinner"
+                android:id="@+id/swim_type"
                 android:spinnerMode="dropdown"
                 android:layout_column="1"
                 android:layout_span="3"
@@ -72,7 +72,7 @@
             <Spinner
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
-                android:id="@+id/spinner2"
+                android:id="@+id/athlete_list"
                 android:spinnerMode="dropdown"
                 android:layout_span="3"
                 android:entries="@array/lista_atletas" />
@@ -96,7 +96,7 @@
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:inputType="numberDecimal"
-                android:id="@+id/distancia" />
+                android:id="@+id/training_distance" />
 
         </TableRow>
 

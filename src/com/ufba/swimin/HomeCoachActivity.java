@@ -12,8 +12,11 @@ import android.widget.TextView;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.Cursor;
 
-public class HomeCoachActivity extends Activity {
+import com.ufba.swimin.helper.DatabaseHelper;
+import com.ufba.swimin.model.Coach;
 
+public class HomeCoachActivity extends Activity {
+    DatabaseHelper db;
 	SQLiteDatabase bancoDados = null;
 	Cursor cursor;
 	
@@ -24,69 +27,83 @@ public class HomeCoachActivity extends Activity {
 	tvNado1, tvNado2, tvNado3, tvNado4;
 	
 	String id_treinador = "1";
+    Coach co;
 	
 	//Home para Treinador
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.home_coach);
-		
-		abreOuCriaBanco();
-		gravarRegistro();
-		init();		//Inicializa os elementos (TextView, Button etc)
-		carregaDadosNaTela();
-		
-		btPerfil.setOnClickListener(new View.OnClickListener() {
-			
-			@Override
-			public void onClick(View arg0) {
-				//setContentView(R.layout.profile);
-				Intent intent = new Intent(context, ProfileActivity.class);
-				startActivity(intent);
-			}
-		});
-		
-		btAddAtleta.setOnClickListener(new View.OnClickListener() {
-			
-			@Override
-			public void onClick(View arg0) {
-				//setContentView(R.layout.profile);
-				Intent intent = new Intent(context, AddAtleta.class);
-				startActivity(intent);
-			}
-		});
-		
-		
-		btUsuarios.setOnClickListener(new View.OnClickListener() {
-			
-			@Override
-			public void onClick(View arg0) {
-				//setContentView(R.layout.user_list);
-				Intent intent = new Intent(context, UserListActivity.class);
-				startActivity(intent);
-			}
-		});
-		
-		btTreinos.setOnClickListener(new View.OnClickListener() {
-			
-			@Override
-			public void onClick(View arg0) {
-				//setContentView(R.layout.training);
-				Intent intent = new Intent(context, TrainingActivity.class);
-				startActivity(intent);
-			}
-		});
-		
-		btRanking.setOnClickListener(new View.OnClickListener() {
-			
-			@Override
-			public void onClick(View arg0) {
-				//setContentView(R.layout.ranking);
-				Intent intent = new Intent(context, Ranking.class);
-				startActivity(intent);
-			}
-		});
+
+        db = new DatabaseHelper(this);
+
+        co = db.getCoach();
+        if (co == null) {
+            Intent intent = new Intent(getApplicationContext(), AddCoachActivity.class);
+            startActivity(intent);
+        } else {
+            setContentView(R.layout.home_coach);
+
+            abreOuCriaBanco();
+            gravarRegistro();
+            init();		//Inicializa os elementos (TextView, Button etc)
+            carregaDadosNaTela();
+
+            tvWelcome.setText("Bem-vindo "+ co.getName());
+
+            btPerfil.setOnClickListener(new View.OnClickListener() {
+
+                @Override
+                public void onClick(View arg0) {
+                    //setContentView(R.layout.profile);
+                    Intent intent = new Intent(context, ProfileActivity.class);
+                    intent.putExtra("person_id", String.valueOf(co.getId()));
+                    intent.putExtra("person_type", "COACH");
+                    startActivity(intent);
+                }
+            });
+
+            btAddAtleta.setOnClickListener(new View.OnClickListener() {
+
+                @Override
+                public void onClick(View arg0) {
+                    //setContentView(R.layout.profile);
+                    Intent intent = new Intent(context, AddAthleteActivity.class);
+                    startActivity(intent);
+                }
+            });
+
+
+            btUsuarios.setOnClickListener(new View.OnClickListener() {
+
+                @Override
+                public void onClick(View arg0) {
+                    //setContentView(R.layout.user_list);
+                    Intent intent = new Intent(context, UserListActivity.class);
+                    startActivity(intent);
+                }
+            });
+
+            btTreinos.setOnClickListener(new View.OnClickListener() {
+
+                @Override
+                public void onClick(View arg0) {
+                    //setContentView(R.layout.training);
+                    Intent intent = new Intent(context, TrainingActivity.class);
+                    startActivity(intent);
+                }
+            });
+
+            btRanking.setOnClickListener(new View.OnClickListener() {
+
+                @Override
+                public void onClick(View arg0) {
+                    //setContentView(R.layout.ranking);
+                    Intent intent = new Intent(context, Ranking.class);
+                    startActivity(intent);
+                }
+            });
+        }
 	}
 
 	@Override
@@ -102,7 +119,7 @@ public class HomeCoachActivity extends Activity {
 	}
 	
 	/* ---------------------------------------------------------------------
-	 * Carrega os dados da tela - texto de boas-vindas e últimos treinos
+	 * Carrega os dados da tela - texto de boas-vindas e ï¿½ltimos treinos
 	 */
 	
 	public void init(){
@@ -126,13 +143,7 @@ public class HomeCoachActivity extends Activity {
 	
 	public void carregaDadosNaTela(){
 		
-		// Busca o nome do treinador para exibir na tela de boas-vindas
-		buscarDados("pessoas", new String[]{"nome"},
-				"id = "+id_treinador);
-		tvWelcome.setText("Bem-vindo "
-				+ cursor.getString(cursor.getColumnIndex("nome")));
-		
-		// Recupera os dados do último treino
+		// Recupera os dados do ï¿½ltimo treino
 		if(buscarDados("treinos", new String[]{"id_atleta","tipo_nado", "metros",
 				"tempo","data","hora"},
 				"id_treinador = "+id_treinador)){
@@ -148,7 +159,7 @@ public class HomeCoachActivity extends Activity {
 					+ ": " + cursor.getString(cursor.getColumnIndex("tempo"));
 			tvNado1.setText(aux);
 			
-			// Recupera os dados do penúltimo treino
+			// Recupera os dados do penï¿½ltimo treino
 	
 			if(cursor.moveToPrevious()){
 			
@@ -178,7 +189,7 @@ public class HomeCoachActivity extends Activity {
 				exibirMensagem("Erro", "Erro: " + erro.getMessage());
 			}
 			
-			/*Alguns textos ficarão provisoriamente invisíveis, 
+			/*Alguns textos ficarï¿½o provisoriamente invisï¿½veis, 
 			 * para melhoramento posterior
 			 * */
 			tvNado2.setVisibility(View.GONE);
@@ -193,7 +204,7 @@ public class HomeCoachActivity extends Activity {
 			//Cria ou abre o banco
 			bancoDados = openOrCreateDatabase("bancoSwing", MODE_WORLD_READABLE, null);
 			
-			//Código usado pra limpar as tabelas, quando necessário
+			//Cï¿½digo usado pra limpar as tabelas, quando necessï¿½rio
 			//limparTabelas();
 			
 			String sql = "CREATE TABLE IF NOT EXISTS pessoas "
@@ -300,7 +311,7 @@ public class HomeCoachActivity extends Activity {
 	public void gravarRegistro(){
 		try{
 			if(!buscarDados("pessoas", new String[]{"id"})){
-				//O aplicativo é executado pela primeira vez
+				//O aplicativo ï¿½ executado pela primeira vez
 				String sql = "INSERT INTO pessoas (nome, data_nasc, endereco) values "
 						+ "('Usuario', '00/00/0000', 'Cidade -')";
 				bancoDados.execSQL(sql);
@@ -311,27 +322,27 @@ public class HomeCoachActivity extends Activity {
 			
 			/*String sql = "INSERT INTO pessoas (nome, data_nasc, endereco) values "
 					+ "('Manoel Neto', '14/07/1977', 'Rua Rochael Tantan n 38 - Salvador BA')";
-					//+ "('Thalita Andrade', '09/11/1988', 'Rua Itambém Ticotico - Salvador BA')";
+					//+ "('Thalita Andrade', '09/11/1988', 'Rua Itambï¿½m Ticotico - Salvador BA')";
 					//+ "('Helder Carvalho', '11/12/1995', 'Rua Circo Pegafogo - Salvador BA')";
-					//+ "('Lucas Augusto', '30/03/1956', 'Rua Vandré Datena - São Paulo SP')";
+					//+ "('Lucas Augusto', '30/03/1956', 'Rua Vandrï¿½ Datena - Sï¿½o Paulo SP')";
 			bancoDados.execSQL(sql);
 			sql = "INSERT INTO pessoas (nome, data_nasc, endereco) values "
 					//+ "('Manoel Neto', '14/07/1977', 'Rua Rochael Tantan n 38 - Salvador BA')";
-					+ "('Thalita Andrade', '09/11/1988', 'Rua Itambém Ticotico - Salvador BA')";
+					+ "('Thalita Andrade', '09/11/1988', 'Rua Itambï¿½m Ticotico - Salvador BA')";
 					//+ "('Helder Carvalho', '11/12/1995', 'Rua Circo Pegafogo - Salvador BA')";
-					//+ "('Lucas Augusto', '30/03/1956', 'Rua Vandré Datena - São Paulo SP')";
+					//+ "('Lucas Augusto', '30/03/1956', 'Rua Vandrï¿½ Datena - Sï¿½o Paulo SP')";
 			bancoDados.execSQL(sql);
 			sql = "INSERT INTO pessoas (nome, data_nasc, endereco) values "
 					//+ "('Manoel Neto', '14/07/1977', 'Rua Rochael Tantan n 38 - Salvador BA')";
-					//+ "('Thalita Andrade', '09/11/1988', 'Rua Itambém Ticotico - Salvador BA')";
+					//+ "('Thalita Andrade', '09/11/1988', 'Rua Itambï¿½m Ticotico - Salvador BA')";
 					+ "('Helder Carvalho', '11/12/1995', 'Rua Circo Pegafogo - Salvador BA')";
-					//+ "('Lucas Augusto', '30/03/1956', 'Rua Vandré Datena - São Paulo SP')";
+					//+ "('Lucas Augusto', '30/03/1956', 'Rua Vandrï¿½ Datena - Sï¿½o Paulo SP')";
 			bancoDados.execSQL(sql);
 			sql = "INSERT INTO pessoas (nome, data_nasc, endereco) values "
 					//+ "('Manoel Neto', '14/07/1977', 'Rua Rochael Tantan n 38 - Salvador BA')";
-					//+ "('Thalita Andrade', '09/11/1988', 'Rua Itambém Ticotico - Salvador BA')";
+					//+ "('Thalita Andrade', '09/11/1988', 'Rua Itambï¿½m Ticotico - Salvador BA')";
 					//+ "('Helder Carvalho', '11/12/1995', 'Rua Circo Pegafogo - Salvador BA')";
-					+ "('Lucas Augusto', '30/03/1956', 'Rua Vandré Datena - São Paulo SP')";
+					+ "('Lucas Augusto', '30/03/1956', 'Rua Vandrï¿½ Datena - Sï¿½o Paulo SP')";
 			bancoDados.execSQL(sql);
 			sql = "INSERT INTO premios(id_atleta, nome, tipo) values "
 					+ "(1, 'Olimpiadas 2006', 0)";
@@ -392,7 +403,7 @@ public class HomeCoachActivity extends Activity {
 					+ "(4, 2)";
 			bancoDados.execSQL(sql);
 			sql = "INSERT INTO pessoas (nome, data_nasc, endereco) values "
-					+ "('Caio José', '30/01/1980', 'Rua Manoel Tavares - Salvador BA')";
+					+ "('Caio Josï¿½', '30/01/1980', 'Rua Manoel Tavares - Salvador BA')";
 			bancoDados.execSQL(sql);
 			sql = "INSERT INTO atletas (id, peso, altura) values "
 					+ "(5, 60.6, 1.68)";

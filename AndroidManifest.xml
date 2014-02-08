@@ -81,12 +81,20 @@
                 android:value="com.ufba.swimin.ProfileActivity" />
         </activity>
         <activity
-            android:name="com.ufba.swimin.AddAtleta"
+            android:name="com.ufba.swimin.AddAthleteActivity"
             android:label="@string/title_activity_add_atleta"
             android:parentActivityName="com.ufba.swimin.HomeCoachActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.ufba.swimin.HomeCoachActivity" />          
+        </activity>
+        <activity
+            android:name="com.ufba.swimin.AddCoachActivity"
+            android:label="@string/title_activity_edit_profile"
+            android:parentActivityName="com.ufba.swimin.HomeCoachActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.ufba.swimin.HomeCoachActivity" />
         </activity>
     </application>
 

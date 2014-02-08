@@ -37,21 +37,21 @@
                         android:layout_height="67dp"
                         android:textAppearance="?android:attr/textAppearanceLarge"
                         android:text="Maior Tempo:  26:48"
-                        android:id="@+id/textView2" />
+                        android:id="@+id/maxTimeCrawl" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="67dp"
                         android:textAppearance="?android:attr/textAppearanceLarge"
                         android:text="Menor Tempo:  26:48"
-                        android:id="@+id/textView4" />
+                        android:id="@+id/minTimeCrawl" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="67dp"
                         android:textAppearance="?android:attr/textAppearanceLarge"
                         android:text="Tempo Médio:  26:48"
-                        android:id="@+id/textView3" />
+                        android:id="@+id/medTimeCrawl" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -64,21 +64,21 @@
                         android:layout_height="67dp"
                         android:textAppearance="?android:attr/textAppearanceLarge"
                         android:text="Maior Tempo:  26:48"
-                        android:id="@+id/textView5" />
+                        android:id="@+id/maxTimePeito" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="67dp"
                         android:textAppearance="?android:attr/textAppearanceLarge"
                         android:text="Tempo Médio:  26:48"
-                        android:id="@+id/textView6" />
+                        android:id="@+id/minTimePeito" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="67dp"
                         android:textAppearance="?android:attr/textAppearanceLarge"
                         android:text="Menor Tempo:  26:48"
-                        android:id="@+id/textView7" />
+                        android:id="@+id/medTimePeito" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -91,21 +91,21 @@
                         android:layout_height="67dp"
                         android:textAppearance="?android:attr/textAppearanceLarge"
                         android:text="Maior Tempo:  26:48"
-                        android:id="@+id/textView8" />
+                        android:id="@+id/maxTimeCostas" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="67dp"
                         android:textAppearance="?android:attr/textAppearanceLarge"
                         android:text="Tempo Médio:  26:48"
-                        android:id="@+id/textView9" />
+                        android:id="@+id/minTimeCostas" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="67dp"
                         android:textAppearance="?android:attr/textAppearanceLarge"
                         android:text="Menor Tempo:  26:48"
-                        android:id="@+id/textView10" />
+                        android:id="@+id/medTimeCostas" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -119,21 +119,21 @@
                         android:layout_height="67dp"
                         android:textAppearance="?android:attr/textAppearanceLarge"
                         android:text="Maior Tempo:  26:48"
-                        android:id="@+id/textView2" />
+                        android:id="@+id/maxTimeBorboleta" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="67dp"
                         android:textAppearance="?android:attr/textAppearanceLarge"
                         android:text="Menor Tempo:  26:48"
-                        android:id="@+id/textView4" />
+                        android:id="@+id/minTimeBorboleta" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="67dp"
                         android:textAppearance="?android:attr/textAppearanceLarge"
                         android:text="Tempo Médio:  26:48"
-                        android:id="@+id/textView3" />
+                        android:id="@+id/medTimeBorboleta" />
                 </LinearLayout>
             </FrameLayout>
         </LinearLayout>

@@ -7,21 +7,21 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:orientation="vertical"
-    tools:context=".EditProfile" >
-
+    tools:context=".AddAthleteActivity" >
+    
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content" >
 
         <TextView
-            android:id="@+id/title_name"
+            android:id="@+id/title_athlete_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Nome"
             android:textSize="20dp" />
 
         <EditText
-            android:id="@+id/name"
+            android:id="@+id/athlete_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -37,14 +37,14 @@
         android:layout_height="wrap_content" >
 
         <TextView
-            android:id="@+id/title_birthday"
+            android:id="@+id/title_athlete_birthday"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Data de nasc.:"
             android:textSize="20dp" />
 
         <EditText
-            android:id="@+id/birthday"
+            android:id="@+id/athlete_birthday"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -58,14 +58,14 @@
         android:layout_height="wrap_content" >
 
         <TextView
-            android:id="@+id/title_weight"
+            android:id="@+id/title_athlete_weight"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Peso"
             android:textSize="20dp" />
 
         <EditText
-            android:id="@+id/weight"
+            android:id="@+id/athlete_weight"
             android:layout_width="30dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -79,14 +79,14 @@
         android:layout_height="wrap_content" >
 
         <TextView
-            android:id="@+id/title_height"
+            android:id="@+id/title_athlete_height"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Altura"
             android:textSize="20dp" />
 
         <EditText
-            android:id="@+id/height"
+            android:id="@+id/athlete_height"
             android:layout_width="30dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -100,10 +100,10 @@
         android:layout_height="wrap_content" >
 
         <Button
-            android:id="@+id/btSave"
+            android:id="@+id/athlete_save"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Atualizar" />
+            android:text="Salvar" />
 
     </LinearLayout>
 
