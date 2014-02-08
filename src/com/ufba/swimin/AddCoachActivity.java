@@ -66,6 +66,7 @@ public class AddCoachActivity extends Activity {
                 Toast.makeText(getApplicationContext(), "Perfil Atualizado.", Toast.LENGTH_SHORT).show();
                 etName.setText("");
                 etBirthday.setText("");
+                finish();
             }
         });
     }
