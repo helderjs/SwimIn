@@ -47,40 +47,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 + "id_athlete INTEGER, name TEXT, type INTEGER, "
                 + "FOREIGN KEY (id_athlete) REFERENCES people(id))";
         db.execSQL(sql);
-
-        sql = "CREATE TABLE IF NOT EXISTS pessoas "
-                + "(id INTEGER PRIMARY KEY AUTOINCREMENT, nome TEXT, data_nasc TEXT, endereco TEXT)";
-        db.execSQL(sql);
-
-        sql = "CREATE TABLE IF NOT EXISTS atletas "
-                + "(id INTEGER PRIMARY KEY REFERENCES pessoas (id), "
-                + "peso REAL, altura REAL)";
-        db.execSQL(sql);
-
-        sql = "CREATE TABLE IF NOT EXISTS treinadores "
-                + "(id INTEGER PRIMARY KEY REFERENCES pessoas(id), "
-                + "numero_atletas INTEGER)";
-        db.execSQL(sql);
-
-        sql = "CREATE TABLE IF NOT EXISTS atletas_treinadores "
-                + "(id_atleta INTEGER PRIMARY KEY REFERENCES atletas(id), "
-                + "id_treinador INTEGER, "
-                + "FOREIGN KEY (id_treinador) REFERENCES treinadores(id))";
-        db.execSQL(sql);
-
-        sql = "CREATE TABLE IF NOT EXISTS treinos "
-                + "(id INTEGER PRIMARY KEY AUTOINCREMENT, id_treinador INTEGER, "
-                + "id_atleta INTEGER, tipo_nado TEXT, metros REAL, tempo TEXT, "
-                + "data TEXT, hora TEXT, "
-                + "FOREIGN KEY (id_treinador) REFERENCES treinadores(id), "
-                + "FOREIGN KEY (id_atleta) REFERENCES atletas(id))";
-        db.execSQL(sql);
-
-        sql = "CREATE TABLE IF NOT EXISTS premios "
-                + "(id INTEGER PRIMARY KEY AUTOINCREMENT, "
-                + "id_atleta INTEGER, nome TEXT, tipo INTEGER, "
-                + "FOREIGN KEY (id_atleta) REFERENCES atletas(id))";
-        db.execSQL(sql);
     }
 
     // Upgrading database
@@ -88,13 +54,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS people");
         db.execSQL("DROP TABLE IF EXISTS trainings");
-        db.execSQL("DROP TABLE IF EXISTS pessoas");
-        db.execSQL("DROP TABLE IF EXISTS atletas");
-        db.execSQL("DROP TABLE IF EXISTS treinadores");
-        db.execSQL("DROP TABLE IF EXISTS atletas_treinadores");
-        db.execSQL("DROP TABLE IF EXISTS treinos");
-        db.execSQL("DROP TABLE IF EXISTS premios");
-
+        db.execSQL("DROP TABLE IF EXISTS awards");
         // Create tables again
         onCreate(db);
     }
